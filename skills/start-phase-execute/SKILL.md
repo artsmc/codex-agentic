@@ -15,6 +15,13 @@ Converted from `skills/start-phase-execute/SKILL.md`.
 
 The content below was adapted from the Claude source. Rewrite tool and runtime assumptions as needed when they refer to Claude-only features.
 
+## Codex Adaptation Notes
+
+- Invoke this workflow as `$start-phase-execute <task_list_file>`.
+- References to hooks, `cache_wrapper.py`, subagents, or parallel Task tool calls are optional host-side orchestration patterns from the original Claude setup.
+- In Codex, prefer direct skill invocation, direct file edits, and explicit shell commands. If you want the original PM-DB or hook behavior, wire it from the vendored assets in `pm-db` and `imports/claude-dev-agents/`.
+- When this document says "agent" or "subagent", interpret that as either another Codex session, a direct invocation of a migrated specialist skill, or manual execution in the current session.
+
 # Start-Phase: Mode 2 (Execute) with PM-DB Tracking
 
 Structured execution with quality gates enforcement and automatic project management database tracking.
@@ -23,20 +30,20 @@ Structured execution with quality gates enforcement and automatic project manage
 
 ```bash
 # Basic execution
-/start-phase execute /path/to/task-list.md
+$start-phase-execute /path/to/task-list.md
 
 # With extra instructions
-/start-phase execute /path/to/task-list.md "Focus on type safety and add extra error handling"
+$start-phase-execute /path/to/task-list.md "Focus on type safety and add extra error handling"
 
 # With specific spec ID for tracking
-/start-phase execute /path/to/task-list.md "" 4
+$start-phase-execute /path/to/task-list.md "" 4
 ```
 
 **Example:**
 ```bash
-/start-phase execute ./job-queue/prototype-build/tasks.md
-/start-phase execute ./job-queue/auth/tasks.md "Use bcrypt for passwords, add rate limiting"
-/start-phase execute ./job-queue/feature-dynamodb-profile-schema/tasks.md "" 4
+$start-phase-execute ./job-queue/prototype-build/tasks.md
+$start-phase-execute ./job-queue/auth/tasks.md "Use bcrypt for passwords, add rate limiting"
+$start-phase-execute ./job-queue/feature-dynamodb-profile-schema/tasks.md "" 4
 ```
 
 ## Purpose
@@ -45,7 +52,7 @@ Mode 2 implements the complete execution workflow:
 - Part 1: Finalize plan + create directories + **initialize pm-db job**
 - Part 2: Detailed planning (3 required docs)
 - Part 3: Execute tasks with agent personas + **pm-db task tracking**
-- Part 3.5: Quality gates (automatic via hook) + **code review tracking**
+- Part 3.5: Quality gates and code review tracking, either manually or via optional host automation
 - Part 4: Task updates + commits
 - Part 5: Phase closeout + summary + **complete pm-db job**
 
@@ -110,6 +117,8 @@ Extract:
 ---
 
 ### Step 1.2b: Initialize PM-DB Job Tracking
+
+If you have wired the original PM-DB hook scripts into your host environment, you can use them here. Otherwise, initialize tracking manually with the `pm-db` scripts or direct database updates.
 
 **Create phase run record in pm-db for this execution:**
 

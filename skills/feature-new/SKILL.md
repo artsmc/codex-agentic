@@ -21,6 +21,12 @@ Supporting files copied from the Claude source:
 
 The content below was adapted from the Claude source. Rewrite tool and runtime assumptions as needed when they refer to Claude-only features.
 
+## Codex Adaptation Notes
+
+- Invoke referenced skills directly as `$documentation-start`, `$spec-plan`, `$spec-review`, `$start-phase-plan`, `$pm-db`, `$start-phase-execute`, and `$feature-continue`.
+- Treat any mention of hooks or automatic agent delegation as optional host-side automation, not native Codex behavior.
+- When a step says "Invoke", call the named skill directly or execute the equivalent work in the current Codex session.
+
 # Feature New - Complete Workflow Orchestration
 
 Execute the complete end-to-end feature development workflow with automatic PM-DB tracking.
@@ -55,7 +61,7 @@ Read to check: memory-bank/systemPatterns.md
 
 ## Step 2: Generate Feature Specification
 
-Invoke "spec-plan" with the feature_description argument:
+Invoke `$spec-plan` with the feature description:
 
 ```
 Invoke:
@@ -83,7 +89,7 @@ Invoke:
 
 ## Step 3: Review Specification Quality
 
-Invoke "spec-review":
+Invoke `$spec-review`:
 
 ```
 Invoke:
@@ -119,7 +125,7 @@ Find the task-list.md file from the spec generation:
 Use `rg --files` or globbing: "**/feature-*/task-list.md"
 ```
 
-Then invoke "start-phase-plan" with the task list path:
+Then invoke `$start-phase-plan` with the task list path:
 
 ```
 Invoke:
@@ -141,14 +147,14 @@ Invoke:
 **If user rejects the plan:**
 - Display: "ℹ️ Plan rejected by user"
 - Show: "Specification saved at: ./job-queue/feature-{name}/"
-- Show: "You can re-plan later with: /start-phase plan {path}"
+- Show: "You can re-plan later with: $start-phase-plan {path}"
 - STOP the workflow
 
 ---
 
 ## Step 5: Import to PM-DB
 
-Invoke "pm-db" with import command:
+Invoke `$pm-db` with the import command:
 
 ```
 Invoke:
@@ -179,7 +185,7 @@ Invoke:
 
 ## Step 6: Execute Phase with Quality Gates
 
-Invoke "start-phase-execute" with the task list path:
+Invoke `$start-phase-execute` with the task list path:
 
 ```
 Invoke:
@@ -188,18 +194,9 @@ Invoke:
 ```
 
 **What to expect:**
-- The start-phase-execute skill will:
-  1. Call on-phase-run-start hook (gets phase_run_id)
-  2. Execute Part 1-5 of the execution workflow
-  3. For each task:
-     - Call on-task-run-start hook
-     - Execute task with appropriate agent
-     - Call on-task-run-complete hook
-     - Run quality gates
-     - Create task update
-     - Git commit
-  4. Call on-phase-run-complete hook
-  5. Display execution metrics
+- The start-phase-execute skill will walk the execution workflow.
+- If you wire PM-DB hooks or helper scripts from this repo, it can use them as optional automation.
+- Without extra host automation, perform the execution steps directly and update PM-DB explicitly with `$pm-db`.
 
 **After it completes:**
 - Display: "✅ Step 6/6: Phase execution complete"
@@ -292,7 +289,7 @@ These checkpoints prevent:
 ## Notes for Execution
 
 - **Sequential execution**: Each step must complete before starting the next
-- **Use Skill tool**: All sub-skills must be invoked using the Skill tool, not mentioned as text
+- **Invoke skills directly**: Use `$skill-name` form or execute the equivalent work in the current Codex session
 - **Wait for completion**: Don't proceed to next step until current step finishes
 - **Check exit codes**: If a sub-skill fails, handle the error and stop
 - **Display progress**: Show step numbers [X/6] throughout

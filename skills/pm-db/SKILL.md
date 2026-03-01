@@ -31,6 +31,12 @@ Supporting files copied from the Claude source:
 
 The content below was adapted from the Claude source. Rewrite tool and runtime assumptions as needed when they refer to Claude-only features.
 
+## Codex Adaptation Notes
+
+- The helper scripts in `scripts/` and SQL migrations in `assets/migrations/` are the primary portable parts of this skill.
+- Hook files from the original Claude setup are vendored under `imports/claude-dev-agents/hooks/pm-db`, but Codex does not run them automatically.
+- Use this skill for explicit database setup, import, migration, and reporting tasks. Treat hook references as optional application integration work.
+
 # pm-db Skill
 
 Manage the project management database for tracking specifications, jobs, tasks, code reviews, and execution logs.
@@ -103,19 +109,13 @@ $pm-db dashboard --format json
 
 Default: `~/.codex/projects.db`
 
-## Hooks
+## Hook Sources
 
-The pm-db system includes automatic hooks:
-- `on-job-start` - Creates job record when /start-phase begins
-- `on-task-start` - Creates task record when task starts
-- `on-tool-use` - Logs every command execution
-- `on-code-review` - Stores code review summaries
-- `on-task-complete` - Marks task complete
-- `on-agent-assign` - Records agent assignments
+The original Claude setup used hook scripts for automatic tracking. Those source files are preserved for reference under `imports/claude-dev-agents/hooks/pm-db`, but they are not native Codex behavior.
 
 ## Schema
 
-See `migrations/` for complete database schema.
+See `assets/migrations/` for the vendored SQL schema and `assets/prisma/schema.prisma` for the Prisma schema snapshot.
 
 Tables:
 - `projects` - Top-level projects
