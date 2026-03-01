@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mastra Core Developer"
+  short_description: "Converted Claude specialist agent for mastra-core-developer...."
+  default_prompt: "Use $mastra-core-developer for this workflow."

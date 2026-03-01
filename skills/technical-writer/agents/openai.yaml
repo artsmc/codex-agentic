@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical Writer"
+  short_description: "Use this agent when you need to create or improve user-facing..."
+  default_prompt: "Use $technical-writer for this workflow."

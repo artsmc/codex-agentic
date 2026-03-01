@@ -1,0 +1,4 @@
+interface:
+  display_name: "Start Phase Execute"
+  short_description: "Mode 2 - Structured execution with quality gates (Part 1-5) w..."
+  default_prompt: "Use $start-phase-execute for this workflow."

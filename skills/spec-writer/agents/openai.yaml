@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec Writer"
+  short_description: "Use this agent when you need to create comprehensive feature..."
+  default_prompt: "Use $spec-writer for this workflow."

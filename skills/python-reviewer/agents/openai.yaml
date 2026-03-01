@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python Reviewer"
+  short_description: "Elite code review expert for Python. Focuses on Pythonic idio..."
+  default_prompt: "Use $python-reviewer for this workflow."

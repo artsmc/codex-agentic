@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Quality Assess"
+  short_description: "Converted Claude skill for architecture-quality-assess. Use w..."
+  default_prompt: "Use $architecture-quality-assess for this workflow."

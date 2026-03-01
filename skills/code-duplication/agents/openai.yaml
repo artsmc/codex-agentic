@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Duplication"
+  short_description: "Deep analysis of codebase for code duplication. Detects exact..."
+  default_prompt: "Use $code-duplication for this workflow."

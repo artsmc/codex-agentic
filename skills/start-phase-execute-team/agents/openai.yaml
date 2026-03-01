@@ -1,0 +1,4 @@
+interface:
+  display_name: "Start Phase Execute Team"
+  short_description: "Parallel task execution with multi-agent teams and quality ga..."
+  default_prompt: "Use $start-phase-execute-team for this workflow."

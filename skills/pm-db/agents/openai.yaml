@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pm Db"
+  short_description: "Project management database for tracking specs, jobs, tasks,..."
+  default_prompt: "Use $pm-db for this workflow."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database Schema Specialist"
+  short_description: "Database design, schema migrations, query optimization, and d..."
+  default_prompt: "Use $database-schema-specialist for this workflow."

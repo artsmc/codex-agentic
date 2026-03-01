@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nextjs Code Reviewer"
+  short_description: "code reviews. Use when Codex needs this specialist perspectiv..."
+  default_prompt: "Use $nextjs-code-reviewer for this workflow."

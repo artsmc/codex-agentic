@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document Hub Update"
+  short_description: "Comprehensive review and update of the documentation hub. Ana..."
+  default_prompt: "Use $document-hub-update for this workflow."

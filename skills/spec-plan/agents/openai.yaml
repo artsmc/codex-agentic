@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec Plan"
+  short_description: "Pre-planning and research for feature specifications. Use whe..."
+  default_prompt: "Use $spec-plan for this workflow."

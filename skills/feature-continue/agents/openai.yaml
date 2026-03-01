@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feature Continue"
+  short_description: "Resume interrupted feature work from task-list.md with PM-DB..."
+  default_prompt: "Use $feature-continue for this workflow."

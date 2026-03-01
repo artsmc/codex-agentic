@@ -1,0 +1,4 @@
+interface:
+  display_name: "Qa Engineer"
+  short_description: "for writting unit test. Use when Codex needs this specialist..."
+  default_prompt: "Use $qa-engineer for this workflow."

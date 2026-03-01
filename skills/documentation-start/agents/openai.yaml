@@ -1,0 +1,4 @@
+interface:
+  display_name: "Documentation Start"
+  short_description: "Initialize Memory Bank and Document Hub if not already set up..."
+  default_prompt: "Use $documentation-start for this workflow."

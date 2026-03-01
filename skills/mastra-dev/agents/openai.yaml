@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mastra Dev"
+  short_description: "Ultimate Mastra Framework development toolkit for agent orche..."
+  default_prompt: "Use $mastra-dev for this workflow."

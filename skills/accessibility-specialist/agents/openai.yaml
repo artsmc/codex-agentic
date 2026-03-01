@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accessibility Specialist"
+  short_description: "WCAG compliance, screen reader compatibility, keyboard naviga..."
+  default_prompt: "Use $accessibility-specialist for this workflow."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Devops Infrastructure"
+  short_description: "CI/CD pipelines, containerization, deployment automation, and..."
+  default_prompt: "Use $devops-infrastructure for this workflow."

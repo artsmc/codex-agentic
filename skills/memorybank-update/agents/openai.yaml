@@ -1,0 +1,4 @@
+interface:
+  display_name: "Memorybank Update"
+  short_description: "Comprehensive review and update of all Memory Bank files. Rea..."
+  default_prompt: "Use $memorybank-update for this workflow."

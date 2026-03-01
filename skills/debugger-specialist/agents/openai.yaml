@@ -1,0 +1,4 @@
+interface:
+  display_name: "Debugger Specialist"
+  short_description: "Complex issue diagnosis, root cause analysis, and production..."
+  default_prompt: "Use $debugger-specialist for this workflow."

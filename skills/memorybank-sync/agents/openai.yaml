@@ -1,0 +1,4 @@
+interface:
+  display_name: "Memorybank Sync"
+  short_description: "Fast synchronization of activeContext.md and progress.md only..."
+  default_prompt: "Use $memorybank-sync for this workflow."

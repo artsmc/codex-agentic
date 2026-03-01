@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refactoring Specialist"
+  short_description: "Use this agent for technical debt reduction, code modernizati..."
+  default_prompt: "Use $refactoring-specialist for this workflow."

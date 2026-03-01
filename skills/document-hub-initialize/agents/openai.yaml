@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document Hub Initialize"
+  short_description: "Bootstrap a new project's documentation hub by creating the f..."
+  default_prompt: "Use $document-hub-initialize for this workflow."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feature New"
+  short_description: "Complete feature workflow - from planning to execution with P..."
+  default_prompt: "Use $feature-new for this workflow."

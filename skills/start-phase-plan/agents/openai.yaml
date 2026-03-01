@@ -1,0 +1,4 @@
+interface:
+  display_name: "Start Phase Plan"
+  short_description: "Mode 1 - Strategic planning with human approval before execut..."
+  default_prompt: "Use $start-phase-plan for this workflow."

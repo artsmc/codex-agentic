@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec Review"
+  short_description: "Validate, critique, and iterate on generated specifications...."
+  default_prompt: "Use $spec-review for this workflow."

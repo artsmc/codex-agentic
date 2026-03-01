@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Developer"
+  short_description: "Handles the application logic and data management for the fro..."
+  default_prompt: "Use $frontend-developer for this workflow."

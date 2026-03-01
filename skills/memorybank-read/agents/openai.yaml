@@ -1,0 +1,4 @@
+interface:
+  display_name: "Memorybank Read"
+  short_description: "Quick overview of Memory Bank state. Validates structure, rea..."
+  default_prompt: "Use $memorybank-read for this workflow."

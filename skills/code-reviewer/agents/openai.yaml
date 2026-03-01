@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Reviewer"
+  short_description: "code reviews. Use when Codex needs this specialist perspectiv..."
+  default_prompt: "Use $code-reviewer for this workflow."

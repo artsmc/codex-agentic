@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remote Control Builder"
+  short_description: "Build remote control system for Claude Code using multi-agent..."
+  default_prompt: "Use $remote-control-builder for this workflow."

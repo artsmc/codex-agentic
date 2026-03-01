@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security Quality Assess"
+  short_description: "Automated security vulnerability scanning for Python and Java..."
+  default_prompt: "Use $security-quality-assess for this workflow."

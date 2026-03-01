@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security Auditor"
+  short_description: "Security reviews, vulnerability scanning, OWASP compliance, a..."
+  default_prompt: "Use $security-auditor for this workflow."

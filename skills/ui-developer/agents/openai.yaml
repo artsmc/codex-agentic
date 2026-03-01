@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ui Developer"
+  short_description: "Handles the visual implementation of React components. This a..."
+  default_prompt: "Use $ui-developer for this workflow."

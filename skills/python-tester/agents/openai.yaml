@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python Tester"
+  short_description: "Writes Pytest suites for unit and integration testing. Aims f..."
+  default_prompt: "Use $python-tester for this workflow."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document Hub Analyze"
+  short_description: "Deep analysis of codebase vs documentation alignment. Detects..."
+  default_prompt: "Use $document-hub-analyze for this workflow."

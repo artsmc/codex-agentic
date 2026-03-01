@@ -1,0 +1,4 @@
+interface:
+  display_name: "Api Designer"
+  short_description: "Use this agent when you need to design API contracts BEFORE i..."
+  default_prompt: "Use $api-designer for this workflow."

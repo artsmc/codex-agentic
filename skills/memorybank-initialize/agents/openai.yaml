@@ -1,0 +1,4 @@
+interface:
+  display_name: "Memorybank Initialize"
+  short_description: "Bootstrap a new project's Memory Bank by creating the six cor..."
+  default_prompt: "Use $memorybank-initialize for this workflow."

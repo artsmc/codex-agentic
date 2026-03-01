@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document Hub Read"
+  short_description: "Read and summarize the current state of the documentation hub..."
+  default_prompt: "Use $document-hub-read for this workflow."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "New Product"
+  short_description: "Deep research and architecture design for new product develop..."
+  default_prompt: "Use $new-product for this workflow."
