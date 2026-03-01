@@ -2,6 +2,17 @@
 
 Shareable Codex/OpenAI skills, plus full-source migrations of Claude-oriented agent bundles.
 
+## Start Here
+
+The easiest way to approach this repo is:
+
+1. Start with a guided workflow like `feature-new`.
+2. Set up project context with `documentation-start`, `document-hub-*`, and `memorybank-*`.
+3. Move to focused planning and review skills like `spec-plan`, `spec-review`, and `pm-db`.
+4. Graduate to the more advanced orchestration skills like `start-phase-plan`, `start-phase-execute`, and `remote-control-builder`.
+
+If you are trying to understand the bundle quickly, treat `feature-new` as the on-ramp, `document-hub-*` and `memorybank-*` as the context layer, and the `start-phase-*` skills as the advanced layer.
+
 ## Structure
 
 - `skills/` - installable Codex skills
@@ -17,6 +28,59 @@ Shareable Codex/OpenAI skills, plus full-source migrations of Claude-oriented ag
 - original specialist names such as `api-designer`, `spec-writer`, `security-auditor`, and `python-reviewer`
 
 When source names collide, the conversion falls back to the source filename, for example `nextjs-code-reviewer` or `python-reviewer-2`.
+
+## Recommended Path
+
+### Getting Started
+
+Use these first:
+
+- `feature-new` - the most approachable end-to-end workflow
+- `documentation-start` - initialize the documentation systems expected by the wider workflow
+- `document-hub-read` - quickly understand the current documentation hub
+- `memorybank-read` - quickly understand the current memory-bank state
+
+### Context and Documentation
+
+Use these to create and maintain project context:
+
+- `document-hub-initialize`
+- `document-hub-read`
+- `document-hub-analyze`
+- `document-hub-update`
+- `memorybank-initialize`
+- `memorybank-read`
+- `memorybank-sync`
+- `memorybank-update`
+
+These skills are the context backbone for the planning and execution workflows.
+
+### Planning and Tracking
+
+Use these once the documentation layer is in place:
+
+- `spec-plan` - generate specs and planning artifacts
+- `spec-review` - review the quality of those specs
+- `pm-db` - inspect or manage the project-management database layer explicitly
+
+### Advanced Workflows
+
+Use these once you want more control or more automation:
+
+- `start-phase-plan` - break work into waves and execution phases
+- `start-phase-execute` - run structured execution with quality gates and PM-DB tracking
+- `start-phase-execute-team` - team-oriented execution variant
+- `remote-control-builder` - higher-complexity orchestration workflow
+
+### Specialist Skills
+
+When you need focused expertise, reach for the migrated specialist skills such as:
+
+- `api-designer`
+- `spec-writer`
+- `security-auditor`
+- `python-reviewer`
+- `technical-writer`
 
 ## Included Imports
 
