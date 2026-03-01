@@ -42,8 +42,8 @@ Manage the project management database for tracking specifications, jobs, tasks,
 Creates the projects.db database and runs all migrations.
 
 ```bash
-$claude-dev-pm-db init
-$claude-dev-pm-db init --reset  # Backup existing and create fresh database
+$pm-db init
+$pm-db init --reset  # Backup existing and create fresh database
 ```
 
 ### `import` - Import Specifications
@@ -51,8 +51,8 @@ $claude-dev-pm-db init --reset  # Backup existing and create fresh database
 Imports specifications from job-queue folders.
 
 ```bash
-$claude-dev-pm-db import
-$claude-dev-pm-db import --project auth  # Filter by project name
+$pm-db import
+$pm-db import --project auth  # Filter by project name
 ```
 
 ### `dashboard` - Show Dashboard
@@ -60,9 +60,9 @@ $claude-dev-pm-db import --project auth  # Filter by project name
 Displays project management dashboard with metrics.
 
 ```bash
-$claude-dev-pm-db dashboard
-$claude-dev-pm-db dashboard --format json
-$claude-dev-pm-db dashboard --format markdown
+$pm-db dashboard
+$pm-db dashboard --format json
+$pm-db dashboard --format markdown
 ```
 
 ### `migrate` - Run Migrations
@@ -70,9 +70,9 @@ $claude-dev-pm-db dashboard --format markdown
 Applies pending database migrations.
 
 ```bash
-$claude-dev-pm-db migrate
-$claude-dev-pm-db migrate --dry-run
-$claude-dev-pm-db migrate --target-version 2
+$pm-db migrate
+$pm-db migrate --dry-run
+$pm-db migrate --target-version 2
 ```
 
 ### `backup` - Backup Database
@@ -80,23 +80,23 @@ $claude-dev-pm-db migrate --target-version 2
 Creates a timestamped backup of the database (not yet implemented).
 
 ```bash
-$claude-dev-pm-db backup
+$pm-db backup
 ```
 
 ## Examples
 
 ```bash
 # First-time setup
-$claude-dev-pm-db init
+$pm-db init
 
 # Import all specs
-$claude-dev-pm-db import
+$pm-db import
 
 # View dashboard
-$claude-dev-pm-db dashboard
+$pm-db dashboard
 
 # Export to JSON
-$claude-dev-pm-db dashboard --format json
+$pm-db dashboard --format json
 ```
 
 ## Database Location

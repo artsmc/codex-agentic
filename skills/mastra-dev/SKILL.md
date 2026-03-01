@@ -33,22 +33,22 @@ A comprehensive skill for developing, managing, and debugging Mastra Framework a
 
 ```bash
 # Check Mastra server status
-$claude-dev-mastra-dev server status
+$mastra-dev server status
 
 # Analyze current Mastra setup
-$claude-dev-mastra-dev analyze
+$mastra-dev analyze
 
 # Create a new agent
-$claude-dev-mastra-dev create-agent --name "contract-analyzer" --model "anthropic/claude-3-5-sonnet-20241022"
+$mastra-dev create-agent --name "contract-analyzer" --model "anthropic/claude-3-5-sonnet-20241022"
 
 # Create a new workflow
-$claude-dev-mastra-dev create-workflow --name "form-generation" --description "Auto-fill government forms"
+$mastra-dev create-workflow --name "form-generation" --description "Auto-fill government forms"
 
 # Start Mastra server
-$claude-dev-mastra-dev server start
+$mastra-dev server start
 
 # Start Mastra Studio (observability UI)
-$claude-dev-mastra-dev studio start
+$mastra-dev studio start
 ```
 
 ## What This Skill Does
@@ -58,7 +58,7 @@ This skill answers critical questions for Mastra developers:
 ### 1. How do I create a new Mastra agent?
 
 ```bash
-$claude-dev-mastra-dev create-agent \
+$mastra-dev create-agent \
   --name "proposal-writer" \
   --model "openai/gpt-4-turbo" \
   --description "Expert technical writer for government proposals" \
@@ -77,19 +77,19 @@ $claude-dev-mastra-dev create-agent \
 
 ```bash
 # Create workflow
-$claude-dev-mastra-dev create-workflow \
+$mastra-dev create-workflow \
   --name "contract-analysis" \
   --description "Analyze government contract for risks"
 
 # Add steps sequentially
-$claude-dev-mastra-dev add-step \
+$mastra-dev add-step \
   --workflow "contract-analysis" \
   --step-name "extract-text" \
   --step-type "transform" \
   --input-schema '{"documentUrl": "string"}' \
   --output-schema '{"text": "string"}'
 
-$claude-dev-mastra-dev add-step \
+$mastra-dev add-step \
   --workflow "contract-analysis" \
   --step-name "identify-clauses" \
   --step-type "transform" \
@@ -97,7 +97,7 @@ $claude-dev-mastra-dev add-step \
   --output-schema '{"clauses": "array"}'
 
 # Test the workflow
-$claude-dev-mastra-dev test-workflow \
+$mastra-dev test-workflow \
   --name "contract-analysis" \
   --input '{"documentUrl": "https://example.com/contract.pdf"}'
 ```
@@ -113,26 +113,26 @@ $claude-dev-mastra-dev test-workflow \
 
 ```bash
 # Add Wikipedia MCP server
-$claude-dev-mastra-dev mcp add-client \
+$mastra-dev mcp add-client \
   --name "wikipedia" \
   --command "npx" \
   --args "-y,wikipedia-mcp"
 
 # Add remote HTTP MCP server
-$claude-dev-mastra-dev mcp add-client \
+$mastra-dev mcp add-client \
   --name "weather" \
   --url "https://server.smithery.ai/@smithery-ai/national-weather-service/mcp"
 
 # Configure MCP server to expose workflows
-$claude-dev-mastra-dev mcp configure-server \
+$mastra-dev mcp configure-server \
   --agents "proposal-writer" \
   --workflows "contract-analysis"
 
 # List all configured MCP servers
-$claude-dev-mastra-dev mcp list-servers
+$mastra-dev mcp list-servers
 
 # Test MCP connection
-$claude-dev-mastra-dev mcp test --server "wikipedia"
+$mastra-dev mcp test --server "wikipedia"
 ```
 
 **What happens:**
@@ -145,18 +145,18 @@ $claude-dev-mastra-dev mcp test --server "wikipedia"
 
 ```bash
 # Debug specific workflow execution
-$claude-dev-mastra-dev debug-workflow \
+$mastra-dev debug-workflow \
   --name "contract-analysis" \
   --execution-id "abc-123-def-456"
 
 # Show workflow DAG visualization
-$claude-dev-mastra-dev show-graph --workflow "contract-analysis"
+$mastra-dev show-graph --workflow "contract-analysis"
 
 # Validate all Mastra configurations
-$claude-dev-mastra-dev validate
+$mastra-dev validate
 
 # View detailed logs
-$claude-dev-mastra-dev server logs --tail 100
+$mastra-dev server logs --tail 100
 ```
 
 **What happens:**
@@ -171,19 +171,19 @@ $claude-dev-mastra-dev server logs --tail 100
 
 ```bash
 # List all agents
-$claude-dev-mastra-dev list-agents
+$mastra-dev list-agents
 
 # Analyze specific agent
-$claude-dev-mastra-dev analyze-agent --name "proposal-writer"
+$mastra-dev analyze-agent --name "proposal-writer"
 
 # List all workflows
-$claude-dev-mastra-dev list-workflows
+$mastra-dev list-workflows
 
 # List all tools
-$claude-dev-mastra-dev list-tools
+$mastra-dev list-tools
 
 # Comprehensive analysis
-$claude-dev-mastra-dev analyze
+$mastra-dev analyze
 ```
 
 **What happens:**
@@ -204,7 +204,7 @@ Create, list, and analyze Mastra agents with intelligent scaffolding.
 
 ```bash
 # Create new agent
-$claude-dev-mastra-dev create-agent \
+$mastra-dev create-agent \
   --name <agent-name> \
   --model <provider/model> \
   --description <description> \
@@ -212,16 +212,16 @@ $claude-dev-mastra-dev create-agent \
   [--tools <comma-separated-tool-ids>]
 
 # List all agents
-$claude-dev-mastra-dev list-agents
+$mastra-dev list-agents
 
 # Analyze agent configuration
-$claude-dev-mastra-dev analyze-agent --name <agent-name>
+$mastra-dev analyze-agent --name <agent-name>
 ```
 
 **Example - Create Contract Analysis Agent:**
 
 ```bash
-$claude-dev-mastra-dev create-agent \
+$mastra-dev create-agent \
   --name "contract-analyzer" \
   --model "anthropic/claude-3-5-sonnet-20241022" \
   --description "Federal contract analysis expert" \
@@ -262,14 +262,14 @@ Design, build, and test DAG-based workflows with step composition.
 
 ```bash
 # Create new workflow
-$claude-dev-mastra-dev create-workflow \
+$mastra-dev create-workflow \
   --name <workflow-name> \
   --description <description> \
   [--input-schema <json-schema>] \
   [--output-schema <json-schema>]
 
 # Add step to workflow
-$claude-dev-mastra-dev add-step \
+$mastra-dev add-step \
   --workflow <workflow-name> \
   --step-name <step-name> \
   --step-type <transform|api-call|agent-call|parallel|branch> \
@@ -277,26 +277,26 @@ $claude-dev-mastra-dev add-step \
   [--output-schema <json-schema>]
 
 # Test workflow execution
-$claude-dev-mastra-dev test-workflow \
+$mastra-dev test-workflow \
   --name <workflow-name> \
   --input <json-input>
 
 # List all workflows
-$claude-dev-mastra-dev list-workflows
+$mastra-dev list-workflows
 ```
 
 **Example - Build Form Generation Workflow:**
 
 ```bash
 # Step 1: Create workflow
-$claude-dev-mastra-dev create-workflow \
+$mastra-dev create-workflow \
   --name "form-generation" \
   --description "Auto-fill government forms from SAM.gov data" \
   --input-schema '{"opportunityId": "string"}' \
   --output-schema '{"formData": "object", "pdfUrl": "string"}'
 
 # Step 2: Add fetch step
-$claude-dev-mastra-dev add-step \
+$mastra-dev add-step \
   --workflow "form-generation" \
   --step-name "fetch-opportunity" \
   --step-type "api-call" \
@@ -304,7 +304,7 @@ $claude-dev-mastra-dev add-step \
   --output-schema '{"opportunity": "object"}'
 
 # Step 3: Add transform step
-$claude-dev-mastra-dev add-step \
+$mastra-dev add-step \
   --workflow "form-generation" \
   --step-name "extract-data" \
   --step-type "transform" \
@@ -312,7 +312,7 @@ $claude-dev-mastra-dev add-step \
   --output-schema '{"formData": "object"}'
 
 # Step 4: Add PDF generation step
-$claude-dev-mastra-dev add-step \
+$mastra-dev add-step \
   --workflow "form-generation" \
   --step-name "generate-pdf" \
   --step-type "transform" \
@@ -320,7 +320,7 @@ $claude-dev-mastra-dev add-step \
   --output-schema '{"pdfUrl": "string"}'
 
 # Test the workflow
-$claude-dev-mastra-dev test-workflow \
+$mastra-dev test-workflow \
   --name "form-generation" \
   --input '{"opportunityId": "abc-123"}'
 ```
@@ -388,17 +388,17 @@ Create reusable tools with schema validation and type safety.
 
 ```bash
 # Create new tool
-$claude-dev-mastra-dev create-tool \
+$mastra-dev create-tool \
   --name <tool-name> \
   --description <description> \
   [--input-schema <json-schema>] \
   [--output-schema <json-schema>]
 
 # List all tools
-$claude-dev-mastra-dev list-tools
+$mastra-dev list-tools
 
 # Test tool execution
-$claude-dev-mastra-dev test-tool \
+$mastra-dev test-tool \
   --name <tool-name> \
   --input <json-input>
 ```
@@ -406,7 +406,7 @@ $claude-dev-mastra-dev test-tool \
 **Example - Create PDF Generator Tool:**
 
 ```bash
-$claude-dev-mastra-dev create-tool \
+$mastra-dev create-tool \
   --name "pdf-generator" \
   --description "Generate PDF from template and data" \
   --input-schema '{"template": "string", "data": "object"}' \
@@ -449,44 +449,44 @@ Control Mastra server lifecycle and monitor logs.
 
 ```bash
 # Start Mastra server
-$claude-dev-mastra-dev server start
+$mastra-dev server start
 
 # Stop Mastra server
-$claude-dev-mastra-dev server stop
+$mastra-dev server stop
 
 # Check server status
-$claude-dev-mastra-dev server status
+$mastra-dev server status
 
 # View server logs
-$claude-dev-mastra-dev server logs [--tail <lines>]
+$mastra-dev server logs [--tail <lines>]
 
 # Start Mastra Studio (observability UI)
-$claude-dev-mastra-dev studio start
+$mastra-dev studio start
 ```
 
 **Example - Server Management Workflow:**
 
 ```bash
 # Check if server is running
-$claude-dev-mastra-dev server status
+$mastra-dev server status
 # Output: ❌ Mastra server is not running (port 6000)
 
 # Start the server
-$claude-dev-mastra-dev server start
+$mastra-dev server start
 # Output: ✅ Mastra server started on port 6000 (PID: 12345)
 
 # Verify it's running
-$claude-dev-mastra-dev server status
+$mastra-dev server status
 # Output: ✅ Mastra server is running on port 6000 (PID: 12345)
 #         Uptime: 5 minutes
 #         Memory: 245 MB
 
 # View recent logs
-$claude-dev-mastra-dev server logs --tail 50
+$mastra-dev server logs --tail 50
 # Output: [Shows last 50 lines from apps/mastra/logs/mastra.log]
 
 # Start Mastra Studio for observability
-$claude-dev-mastra-dev studio start
+$mastra-dev studio start
 # Output: ✅ Mastra Studio started on http://localhost:4111
 #         Connected to Mastra API at http://localhost:6000
 ```
@@ -506,41 +506,41 @@ Configure Model Context Protocol integration for external tool access.
 
 ```bash
 # Add MCPClient for consuming external servers
-$claude-dev-mastra-dev mcp add-client \
+$mastra-dev mcp add-client \
   --name <server-name> \
   --command <command> \
   [--args <comma-separated-args>] \
   [--url <http-url>]
 
 # Configure MCPServer to expose Mastra tools
-$claude-dev-mastra-dev mcp configure-server \
+$mastra-dev mcp configure-server \
   [--agents <comma-separated-agent-ids>] \
   [--workflows <comma-separated-workflow-ids>] \
   [--tools <comma-separated-tool-ids>]
 
 # List all MCP servers
-$claude-dev-mastra-dev mcp list-servers
+$mastra-dev mcp list-servers
 
 # Test MCP server connection
-$claude-dev-mastra-dev mcp test --server <server-name>
+$mastra-dev mcp test --server <server-name>
 ```
 
 **Example - Add External MCP Servers:**
 
 ```bash
 # Add local stdio MCP server (Wikipedia)
-$claude-dev-mastra-dev mcp add-client \
+$mastra-dev mcp add-client \
   --name "wikipedia" \
   --command "npx" \
   --args "-y,wikipedia-mcp"
 
 # Add remote HTTP MCP server (Weather)
-$claude-dev-mastra-dev mcp add-client \
+$mastra-dev mcp add-client \
   --name "weather" \
   --url "https://server.smithery.ai/@smithery-ai/national-weather-service/mcp"
 
 # Add Puppeteer for browser automation
-$claude-dev-mastra-dev mcp add-client \
+$mastra-dev mcp add-client \
   --name "puppeteer" \
   --command "npx" \
   --args "-y,@modelcontextprotocol/server-puppeteer"
@@ -573,7 +573,7 @@ export const mcpClient = new MCPClient({
 
 ```bash
 # Configure MCPServer to expose workflows
-$claude-dev-mastra-dev mcp configure-server \
+$mastra-dev mcp configure-server \
   --workflows "form-generation,contract-analysis"
 ```
 
@@ -598,7 +598,7 @@ export const mastraMcpServer = new MCPServer({
 **Testing MCP Connection:**
 
 ```bash
-$claude-dev-mastra-dev mcp test --server "wikipedia"
+$mastra-dev mcp test --server "wikipedia"
 # Output: ✅ Connected to wikipedia MCP server
 #         Available tools: search_wikipedia, get_article, get_summary
 #         Transport: stdio
@@ -613,24 +613,24 @@ Analyze Mastra setup, debug workflow execution, and validate configurations.
 
 ```bash
 # Analyze entire Mastra setup
-$claude-dev-mastra-dev analyze
+$mastra-dev analyze
 
 # Debug workflow execution
-$claude-dev-mastra-dev debug-workflow \
+$mastra-dev debug-workflow \
   --name <workflow-name> \
   --execution-id <execution-id>
 
 # Show workflow DAG visualization
-$claude-dev-mastra-dev show-graph --workflow <workflow-name>
+$mastra-dev show-graph --workflow <workflow-name>
 
 # Validate all configurations
-$claude-dev-mastra-dev validate
+$mastra-dev validate
 ```
 
 **Example - Comprehensive Analysis:**
 
 ```bash
-$claude-dev-mastra-dev analyze
+$mastra-dev analyze
 ```
 
 **Output:**
@@ -696,7 +696,7 @@ $claude-dev-mastra-dev analyze
 **Example - Debug Failed Workflow:**
 
 ```bash
-$claude-dev-mastra-dev debug-workflow \
+$mastra-dev debug-workflow \
   --name "contract-analysis" \
   --execution-id "550e8400-e29b-41d4-a716-446655440000"
 ```
@@ -760,7 +760,7 @@ Duration: 32 seconds
 **Example - Show Workflow DAG:**
 
 ```bash
-$claude-dev-mastra-dev show-graph --workflow "form-generation"
+$mastra-dev show-graph --workflow "form-generation"
 ```
 
 **Output (ASCII DAG):**
@@ -794,7 +794,7 @@ Schema Validation: ✅ All schemas compatible
 **Example - Validate All Configurations:**
 
 ```bash
-$claude-dev-mastra-dev validate
+$mastra-dev validate
 ```
 
 **Output:**
@@ -930,7 +930,7 @@ export const mastra = new Mastra({
 });
 ```
 
-After running `$claude-dev-mastra-dev create-agent --name "proposal-writer"`:
+After running `$mastra-dev create-agent --name "proposal-writer"`:
 ```typescript
 import { proposalWriterAgent } from '../agents/proposal-writer.js';
 
@@ -948,14 +948,14 @@ export const mastra = new Mastra({
 
 1. **Start Mastra server** (if not running):
    ```bash
-   $claude-dev-mastra-dev server start
+   $mastra-dev server start
    ```
 
 2. **Create constructs** as needed:
    ```bash
-   $claude-dev-mastra-dev create-agent --name "my-agent"
-   $claude-dev-mastra-dev create-workflow --name "my-workflow"
-   $claude-dev-mastra-dev create-tool --name "my-tool"
+   $mastra-dev create-agent --name "my-agent"
+   $mastra-dev create-workflow --name "my-workflow"
+   $mastra-dev create-tool --name "my-tool"
    ```
 
 3. **Edit generated files** to implement logic:
@@ -965,19 +965,19 @@ export const mastra = new Mastra({
 
 4. **Test locally**:
    ```bash
-   $claude-dev-mastra-dev test-workflow --name "my-workflow" --input '{...}'
-   $claude-dev-mastra-dev test-tool --name "my-tool" --input '{...}'
+   $mastra-dev test-workflow --name "my-workflow" --input '{...}'
+   $mastra-dev test-tool --name "my-tool" --input '{...}'
    ```
 
 5. **Use Mastra Studio** for visual debugging:
    ```bash
-   $claude-dev-mastra-dev studio start
+   $mastra-dev studio start
    # Open http://localhost:4111
    ```
 
 6. **Validate before commit**:
    ```bash
-   $claude-dev-mastra-dev validate
+   $mastra-dev validate
    ```
 
 ## Templates
@@ -1000,7 +1000,7 @@ The skill uses four TypeScript templates for code generation:
 
 **Example Usage:**
 ```bash
-$claude-dev-mastra-dev create-agent \
+$mastra-dev create-agent \
   --name "contract-analyzer" \
   --model "anthropic/claude-3-5-sonnet-20241022" \
   --description "Federal contract analysis expert"
@@ -1022,7 +1022,7 @@ $claude-dev-mastra-dev create-agent \
 
 **Example Usage:**
 ```bash
-$claude-dev-mastra-dev create-workflow \
+$mastra-dev create-workflow \
   --name "form-generation" \
   --description "Auto-fill government forms"
 ```
@@ -1042,7 +1042,7 @@ $claude-dev-mastra-dev create-workflow \
 
 **Example Usage:**
 ```bash
-$claude-dev-mastra-dev create-tool \
+$mastra-dev create-tool \
   --name "pdf-generator" \
   --description "Generate PDF from template"
 ```
@@ -1062,7 +1062,7 @@ $claude-dev-mastra-dev create-tool \
 
 **Example Usage:**
 ```bash
-$claude-dev-mastra-dev add-step \
+$mastra-dev add-step \
   --workflow "my-workflow" \
   --step-name "fetch-data" \
   --step-type "api-call"
@@ -1123,7 +1123,7 @@ $claude-dev-mastra-dev add-step \
 ✅ **DO:**
 - Use stdio transport for local MCP servers
 - Use HTTP transport for remote MCP servers
-- Test MCP connections with `$claude-dev-mastra-dev mcp test`
+- Test MCP connections with `$mastra-dev mcp test`
 - Document which agents use which MCP tools
 - Version MCP server configurations
 
@@ -1160,7 +1160,7 @@ $claude-dev-mastra-dev add-step \
 **Solutions:**
 ```bash
 # Start the server
-$claude-dev-mastra-dev server start
+$mastra-dev server start
 
 # If that fails, check if port is in use
 lsof -i :6000
@@ -1169,7 +1169,7 @@ lsof -i :6000
 kill -9 <PID>
 
 # Start again
-$claude-dev-mastra-dev server start
+$mastra-dev server start
 ```
 
 ### Issue 2: "Agent not found in mastra.config.ts"
@@ -1182,7 +1182,7 @@ $claude-dev-mastra-dev server start
 **Solutions:**
 ```bash
 # Re-run create-agent with --force flag (if implemented)
-$claude-dev-mastra-dev create-agent --name "my-agent" --force
+$mastra-dev create-agent --name "my-agent" --force
 
 # Or manually add to mastra.config.ts:
 # 1. Import: import { myAgent } from '../agents/my-agent.js';
@@ -1205,10 +1205,10 @@ Expected { userId: string }, got { user_id: string }
 
 ```bash
 # Debug the workflow
-$claude-dev-mastra-dev debug-workflow --name "my-workflow" --execution-id "abc-123"
+$mastra-dev debug-workflow --name "my-workflow" --execution-id "abc-123"
 
 # Check DAG visualization
-$claude-dev-mastra-dev show-graph --workflow "my-workflow"
+$mastra-dev show-graph --workflow "my-workflow"
 ```
 
 ### Issue 4: "MCP server connection timeout"
@@ -1225,15 +1225,15 @@ Connection timeout after 5000ms
 npx -y wikipedia-mcp
 
 # Check if command is correct
-$claude-dev-mastra-dev mcp list-servers
+$mastra-dev mcp list-servers
 
 # Remove and re-add server
-$claude-dev-mastra-dev mcp remove-client --name "wikipedia"
-$claude-dev-mastra-dev mcp add-client --name "wikipedia" --command "npx" --args "-y,wikipedia-mcp"
+$mastra-dev mcp remove-client --name "wikipedia"
+$mastra-dev mcp add-client --name "wikipedia" --command "npx" --args "-y,wikipedia-mcp"
 
 # Restart Mastra server
-$claude-dev-mastra-dev server stop
-$claude-dev-mastra-dev server start
+$mastra-dev server stop
+$mastra-dev server start
 ```
 
 ### Issue 5: "Mastra Studio shows blank page"
@@ -1245,13 +1245,13 @@ $claude-dev-mastra-dev server start
 **Solutions:**
 ```bash
 # Ensure Mastra server is running first
-$claude-dev-mastra-dev server status
+$mastra-dev server status
 
 # If not running, start it
-$claude-dev-mastra-dev server start
+$mastra-dev server start
 
 # Then start Studio
-$claude-dev-mastra-dev studio start
+$mastra-dev studio start
 
 # Check CORS configuration in apps/mastra/src/app.ts
 # Should include: http://localhost:4111 in allowed origins
@@ -1305,16 +1305,16 @@ echo $DATABASE_URL
 
 **Symptoms:**
 ```
-bash: /home/artsmc/.claude/skills$claude-dev-mastra-dev/skill.sh: Permission denied
+bash: /home/artsmc/.claude/skills$mastra-dev/skill.sh: Permission denied
 ```
 
 **Solutions:**
 ```bash
 # Make skill executable
-chmod +x /home/artsmc/.claude/skills$claude-dev-mastra-dev/skill.sh
+chmod +x /home/artsmc/.claude/skills$mastra-dev/skill.sh
 
 # Or run with bash explicitly
-bash /home/artsmc/.claude/skills$claude-dev-mastra-dev/skill.sh server status
+bash /home/artsmc/.claude/skills$mastra-dev/skill.sh server status
 ```
 
 ### Issue 9: "Python not found"
@@ -1346,17 +1346,17 @@ brew install python3
 **Solutions:**
 ```bash
 # Configure workflow for MCP exposure
-$claude-dev-mastra-dev mcp configure-server --workflows "my-workflow"
+$mastra-dev mcp configure-server --workflows "my-workflow"
 
 # Verify MCP configuration
-$claude-dev-mastra-dev mcp list-servers
+$mastra-dev mcp list-servers
 
 # Restart Mastra server to apply changes
-$claude-dev-mastra-dev server stop
-$claude-dev-mastra-dev server start
+$mastra-dev server stop
+$mastra-dev server start
 
 # Test MCP connection
-$claude-dev-mastra-dev mcp test --server "mastra-workflows"
+$mastra-dev mcp test --server "mastra-workflows"
 ```
 
 ## Use Cases
@@ -1367,44 +1367,44 @@ $claude-dev-mastra-dev mcp test --server "mastra-workflows"
 
 ```bash
 # 1. Create contract analysis agent
-$claude-dev-mastra-dev create-agent \
+$mastra-dev create-agent \
   --name "contract-analyzer" \
   --model "anthropic/claude-3-5-sonnet-20241022" \
   --description "Expert in federal contract analysis" \
   --instructions "Analyze contracts for FAR/DFARS compliance, identify risks, and extract key terms"
 
 # 2. Create tools for contract processing
-$claude-dev-mastra-dev create-tool \
+$mastra-dev create-tool \
   --name "pdf-parser" \
   --description "Extract text from PDF contracts"
 
-$claude-dev-mastra-dev create-tool \
+$mastra-dev create-tool \
   --name "far-lookup" \
   --description "Look up FAR/DFARS clauses"
 
-$claude-dev-mastra-dev create-tool \
+$mastra-dev create-tool \
   --name "risk-calculator" \
   --description "Calculate contract risk score"
 
 # 3. Create contract analysis workflow
-$claude-dev-mastra-dev create-workflow \
+$mastra-dev create-workflow \
   --name "contract-analysis" \
   --description "End-to-end contract analysis pipeline"
 
 # 4. Add workflow steps
-$claude-dev-mastra-dev add-step --workflow "contract-analysis" --step-name "extract-text"
-$claude-dev-mastra-dev add-step --workflow "contract-analysis" --step-name "identify-clauses"
-$claude-dev-mastra-dev add-step --workflow "contract-analysis" --step-name "check-compliance"
-$claude-dev-mastra-dev add-step --workflow "contract-analysis" --step-name "assess-risks"
-$claude-dev-mastra-dev add-step --workflow "contract-analysis" --step-name "generate-report"
+$mastra-dev add-step --workflow "contract-analysis" --step-name "extract-text"
+$mastra-dev add-step --workflow "contract-analysis" --step-name "identify-clauses"
+$mastra-dev add-step --workflow "contract-analysis" --step-name "check-compliance"
+$mastra-dev add-step --workflow "contract-analysis" --step-name "assess-risks"
+$mastra-dev add-step --workflow "contract-analysis" --step-name "generate-report"
 
 # 5. Test the workflow
-$claude-dev-mastra-dev test-workflow \
+$mastra-dev test-workflow \
   --name "contract-analysis" \
   --input '{"contractUrl": "https://example.com/contract.pdf"}'
 
 # 6. Start Mastra Studio to monitor execution
-$claude-dev-mastra-dev studio start
+$mastra-dev studio start
 ```
 
 ### Use Case 2: Automating Government Form Filling
@@ -1413,31 +1413,31 @@ $claude-dev-mastra-dev studio start
 
 ```bash
 # 1. Add SAM.gov MCP server for data access
-$claude-dev-mastra-dev mcp add-client \
+$mastra-dev mcp add-client \
   --name "sam-gov" \
   --url "https://api.sam.gov/mcp"
 
 # 2. Create form generation workflow
-$claude-dev-mastra-dev create-workflow \
+$mastra-dev create-workflow \
   --name "form-generation" \
   --description "Auto-fill government forms from opportunity data"
 
 # 3. Add steps
-$claude-dev-mastra-dev add-step --workflow "form-generation" --step-name "fetch-opportunity"
-$claude-dev-mastra-dev add-step --workflow "form-generation" --step-name "extract-requirements"
-$claude-dev-mastra-dev add-step --workflow "form-generation" --step-name "fill-form-fields"
-$claude-dev-mastra-dev add-step --workflow "form-generation" --step-name "generate-pdf"
+$mastra-dev add-step --workflow "form-generation" --step-name "fetch-opportunity"
+$mastra-dev add-step --workflow "form-generation" --step-name "extract-requirements"
+$mastra-dev add-step --workflow "form-generation" --step-name "fill-form-fields"
+$mastra-dev add-step --workflow "form-generation" --step-name "generate-pdf"
 
 # 4. Create PDF generator tool
-$claude-dev-mastra-dev create-tool \
+$mastra-dev create-tool \
   --name "pdf-generator" \
   --description "Generate PDF from form data"
 
 # 5. Expose workflow via MCP for external access
-$claude-dev-mastra-dev mcp configure-server --workflows "form-generation"
+$mastra-dev mcp configure-server --workflows "form-generation"
 
 # 6. Test end-to-end
-$claude-dev-mastra-dev test-workflow \
+$mastra-dev test-workflow \
   --name "form-generation" \
   --input '{"opportunityId": "abc-123"}'
 ```
@@ -1448,43 +1448,43 @@ $claude-dev-mastra-dev test-workflow \
 
 ```bash
 # 1. Create specialized agents
-$claude-dev-mastra-dev create-agent \
+$mastra-dev create-agent \
   --name "researcher" \
   --model "anthropic/claude-3-opus-20240229" \
   --description "Deep research expert"
 
-$claude-dev-mastra-dev create-agent \
+$mastra-dev create-agent \
   --name "summarizer" \
   --model "anthropic/claude-3-5-sonnet-20241022" \
   --description "Expert summarizer"
 
-$claude-dev-mastra-dev create-agent \
+$mastra-dev create-agent \
   --name "fact-checker" \
   --model "openai/gpt-4-turbo" \
   --description "Fact verification specialist"
 
 # 2. Add external research tools via MCP
-$claude-dev-mastra-dev mcp add-client --name "wikipedia" --command "npx" --args "-y,wikipedia-mcp"
-$claude-dev-mastra-dev mcp add-client --name "arxiv" --command "npx" --args "-y,arxiv-mcp"
+$mastra-dev mcp add-client --name "wikipedia" --command "npx" --args "-y,wikipedia-mcp"
+$mastra-dev mcp add-client --name "arxiv" --command "npx" --args "-y,arxiv-mcp"
 
 # 3. Create research workflow
-$claude-dev-mastra-dev create-workflow \
+$mastra-dev create-workflow \
   --name "research-pipeline" \
   --description "Multi-agent research system"
 
 # 4. Add parallel research steps
-$claude-dev-mastra-dev add-step --workflow "research-pipeline" --step-name "gather-sources"
-$claude-dev-mastra-dev add-step --workflow "research-pipeline" --step-name "parallel-research" --step-type "parallel"
-$claude-dev-mastra-dev add-step --workflow "research-pipeline" --step-name "synthesize-findings"
-$claude-dev-mastra-dev add-step --workflow "research-pipeline" --step-name "fact-check"
-$claude-dev-mastra-dev add-step --workflow "research-pipeline" --step-name "generate-report"
+$mastra-dev add-step --workflow "research-pipeline" --step-name "gather-sources"
+$mastra-dev add-step --workflow "research-pipeline" --step-name "parallel-research" --step-type "parallel"
+$mastra-dev add-step --workflow "research-pipeline" --step-name "synthesize-findings"
+$mastra-dev add-step --workflow "research-pipeline" --step-name "fact-check"
+$mastra-dev add-step --workflow "research-pipeline" --step-name "generate-report"
 
 # 5. Validate setup
-$claude-dev-mastra-dev validate
+$mastra-dev validate
 
 # 6. Start server and Studio
-$claude-dev-mastra-dev server start
-$claude-dev-mastra-dev studio start
+$mastra-dev server start
+$mastra-dev studio start
 ```
 
 ## Metadata
@@ -1499,9 +1499,9 @@ $claude-dev-mastra-dev studio start
 
 ## Related Skills
 
-- `$claude-dev-feature-new` - Complete feature development workflow
-- `$claude-dev-security-quality-assess` - Security vulnerability scanning
-- `$claude-dev-pm-db` - Project management database
+- `$feature-new` - Complete feature development workflow
+- `$security-quality-assess` - Security vulnerability scanning
+- `$pm-db` - Project management database
 
 ## Support
 

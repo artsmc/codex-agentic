@@ -90,7 +90,7 @@ Beginning strategic review...
 ```bash
 # Initialize invocation
 invocation_output=$(python3 ~/.codex/skills/start-phase/scripts/cache_wrapper.py init \
-    --agent-name "claude-dev-start-phase-plan" \
+    --agent-name "start-phase-plan" \
     --purpose "Strategic planning for $(basename "$input_folder")" 2>/dev/null)
 
 # Extract invocation_id

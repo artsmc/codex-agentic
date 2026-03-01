@@ -26,7 +26,7 @@ The content below was adapted from the Claude source. Rewrite tool and runtime a
 
 **Purpose:** Orchestrate a multi-agent team to build a complete remote control system for Codex sessions (PTY server + browser client + agent API).
 
-**User invokes with:** `$claude-dev-remote-control-builder`
+**User invokes with:** `$remote-control-builder`
 
 ---
 
@@ -49,15 +49,15 @@ You are the **Team Lead** for building a remote control system. Your job is to:
 
 ```typescript
 TeamCreate({
-  team_name: "claude-dev-remote-control-builder",
+  team_name: "remote-control-builder",
   description: "Build remote control system for Codex",
   agent_type: "general-purpose"
 });
 ```
 
 **Creates:**
-- Team config: `~/.codex/teams$claude-dev-remote-control-builder/config.json`
-- Task list dir: `~/.codex/tasks$claude-dev-remote-control-builder/`
+- Team config: `~/.codex/teams$remote-control-builder/config.json`
+- Task list dir: `~/.codex/tasks$remote-control-builder/`
 
 ---
 
@@ -164,8 +164,8 @@ Output: README.md, docs/
 ```typescript
 // Backend developer for PTY server
 Task({
-  subagent_type: "claude-agent-nextjs-backend-developer",  // Has Node.js expertise
-  team_name: "claude-dev-remote-control-builder",
+  subagent_type: "nextjs-backend-developer",  // Has Node.js expertise
+  team_name: "remote-control-builder",
   name: "backend-dev",
   prompt: `
 You are responsible for Task 1: Build PTY server.
@@ -187,8 +187,8 @@ TaskList()
 
 // Frontend developer for browser client
 Task({
-  subagent_type: "claude-agent-frontend-developer",
-  team_name: "claude-dev-remote-control-builder",
+  subagent_type: "frontend-developer",
+  team_name: "remote-control-builder",
   name: "frontend-dev",
   prompt: `
 You are responsible for Task 2: Build browser client.
@@ -202,7 +202,7 @@ Then check TaskList() for Task 4 (integration tests).
 // API developer for agent interface
 Task({
   subagent_type: "general-purpose",
-  team_name: "claude-dev-remote-control-builder",
+  team_name: "remote-control-builder",
   name: "api-dev",
   prompt: `
 You are responsible for Task 3: Build agent API.
@@ -217,7 +217,7 @@ Coordinate with backend-dev to understand the session management interface.
 // QA engineer for testing
 Task({
   subagent_type: "qa-engineer",
-  team_name: "claude-dev-remote-control-builder",
+  team_name: "remote-control-builder",
   name: "qa-engineer",
   prompt: `
 You are responsible for Task 4: Integration tests.
@@ -234,8 +234,8 @@ When ready, write comprehensive tests that verify:
 
 // Technical writer for docs
 Task({
-  subagent_type: "claude-agent-technical-writer",
-  team_name: "claude-dev-remote-control-builder",
+  subagent_type: "technical-writer",
+  team_name: "remote-control-builder",
   name: "tech-writer",
   prompt: `
 You are responsible for Task 5: Documentation.

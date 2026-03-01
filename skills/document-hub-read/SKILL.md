@@ -136,7 +136,7 @@ import subprocess
 from pathlib import Path
 
 project_path = Path("/path/to/project")
-docs_path = project_path / "cline-docs"
+docs_path = project_path / "documentation hub directory"
 
 # Step 1: Validate
 validate = subprocess.run(

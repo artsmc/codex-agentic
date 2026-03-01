@@ -98,7 +98,7 @@ Completeness Score: [X%]
 Action Required:
 These issues must be fixed before proceeding. Would you like me to:
 1. Fix these issues automatically
-2. Re-run `claude-agent-spec-writer` skill with corrections
+2. Re-run `spec-writer` skill with corrections
 3. Guide you to fix them manually
 ```
 
@@ -162,7 +162,7 @@ Ask the user for their assessment:
 → Mark as complete, ready for development
 
 **B) Request Changes**
-→ Collect specific feedback, re-run `claude-agent-spec-writer` skill with updates
+→ Collect specific feedback, re-run `spec-writer` skill with updates
 
 **C) Manual Edits**
 → User will edit files directly, re-run validation after
@@ -179,9 +179,9 @@ If user requests changes:
    - What's missing or incorrect?
    - Any new requirements?
 
-2. **Re-run `claude-agent-spec-writer` skill:**
+2. **Re-run `spec-writer` skill:**
    ```bash
-   Task tool with subagent_type="claude-agent-spec-writer"
+   delegation workflow with skill="spec-writer"
 
    Prompt: "Update feature specifications based on feedback:
 
@@ -247,7 +247,7 @@ Once specs are approved:
 
 1. **Update Memory Bank:**
    ```bash
-   /memorybank sync
+   $memorybank-sync
    ```
 
 2. **Begin Development:**

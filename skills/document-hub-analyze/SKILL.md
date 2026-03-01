@@ -261,7 +261,7 @@ glossary = subprocess.run(
 glossary_data = json.loads(glossary.stdout)
 
 # Read existing glossary
-glossary_file = project_path / "cline-docs" / "glossary.md"
+glossary_file = project_path / "documentation hub directory" / "glossary.md"
 existing_terms = set()
 if glossary_file.exists():
     with open(glossary_file) as f:

@@ -104,7 +104,7 @@ Tool returns what changed:
 
 ```bash
 # After completing authentication feature
-/memorybank sync
+$memorybank-sync
 
 # Claude runs:
 python3 scripts/sync_active.py /path/to/project '{

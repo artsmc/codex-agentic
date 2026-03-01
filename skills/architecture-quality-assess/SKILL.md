@@ -68,7 +68,7 @@ This skill fills the gap between documentation analysis (handled by `document-hu
 This skill is installed by default in the Claude CLI skills directory:
 
 ```bash
-~/.codex/skills$claude-dev-architecture-quality-assess/
+~/.codex/skills$architecture-quality-assess/
 ```
 
 ### Requirements
@@ -94,16 +94,16 @@ pip install networkx tree-sitter
 
 ```bash
 # Analyze current project
-$claude-dev-architecture-quality-assess
+$architecture-quality-assess
 
 # Analyze specific project
-$claude-dev-architecture-quality-assess /path/to/project
+$architecture-quality-assess /path/to/project
 
 # Analyze with verbose output
-$claude-dev-architecture-quality-assess /path/to/project --verbose
+$architecture-quality-assess /path/to/project --verbose
 
 # JSON output for CI/CD
-$claude-dev-architecture-quality-assess /path/to/project --format json
+$architecture-quality-assess /path/to/project --format json
 ```
 
 ### Command-Line Options
@@ -123,7 +123,7 @@ $claude-dev-architecture-quality-assess /path/to/project --format json
 **Basic Project Assessment:**
 ```bash
 # Analyze current project and generate report
-$claude-dev-architecture-quality-assess
+$architecture-quality-assess
 
 # View report
 cat architecture-assessment.md
@@ -132,7 +132,7 @@ cat architecture-assessment.md
 **CI/CD Integration:**
 ```bash
 # Run analysis and fail build if critical issues found
-$claude-dev-architecture-quality-assess --format json --severity critical > assessment.json
+$architecture-quality-assess --format json --severity critical > assessment.json
 
 # Check exit code
 if [ $? -ne 0 ]; then
@@ -144,7 +144,7 @@ fi
 **Incremental Analysis:**
 ```bash
 # Only analyze files changed since last commit
-$claude-dev-architecture-quality-assess --incremental
+$architecture-quality-assess --incremental
 
 # Review violations in changed code only
 ```
@@ -527,7 +527,7 @@ Compares actual architecture vs documented architecture:
 
 ## Task List Generation
 
-Automatically generates refactoring task list compatible with `$claude-dev-start-phase-execute`:
+Automatically generates refactoring task list compatible with `$start-phase-execute`:
 
 **Output File**: `architecture-refactoring-tasks.md`
 
@@ -563,7 +563,7 @@ Automatically generates refactoring task list compatible with `$claude-dev-start
 **Integration:**
 ```bash
 # Generate assessment and task list
-$claude-dev-architecture-quality-assess
+$architecture-quality-assess
 
 # Execute refactoring tasks
 /start-phase execute architecture-refactoring-tasks.md
@@ -586,10 +586,10 @@ $claude-dev-architecture-quality-assess
 **Workflow:**
 ```bash
 # Run assessment
-$claude-dev-architecture-quality-assess
+$architecture-quality-assess
 
 # Sync findings to Memory Bank
-/memorybank sync
+$memorybank-sync
 ```
 
 ---
@@ -603,10 +603,10 @@ $claude-dev-architecture-quality-assess
 **Combined Workflow:**
 ```bash
 # Check documentation alignment
-$claude-dev-document-hub-analyze
+$document-hub-analyze
 
 # Check architecture quality
-$claude-dev-architecture-quality-assess
+$architecture-quality-assess
 
 # Fix both documentation AND code quality issues
 ```
@@ -623,10 +623,10 @@ $claude-dev-architecture-quality-assess
 **Workflow:**
 ```bash
 # Run assessment and track in PM-DB
-$claude-dev-architecture-quality-assess
+$architecture-quality-assess
 
 # Import generated task list
-$claude-dev-pm-db import architecture-refactoring-tasks.md
+$pm-db import architecture-refactoring-tasks.md
 
 # Execute with tracking
 /start-phase execute architecture-refactoring-tasks.md
@@ -741,7 +741,7 @@ jobs:
 
       - name: Run Architecture Assessment
         run: |
-          claude $claude-dev-architecture-quality-assess --format json --severity critical > assessment.json
+          claude $architecture-quality-assess --format json --severity critical > assessment.json
 
       - name: Check Results
         run: |
@@ -858,7 +858,7 @@ MIT License - Part of Claude CLI Skills
 
 ## Support
 
-**Documentation**: ~/.codex/skills$claude-dev-architecture-quality-assess/README.md
+**Documentation**: ~/.codex/skills$architecture-quality-assess/README.md
 **Issues**: Report via `/help` in Claude CLI
 **Contributing**: This is a built-in skill, customization via configuration files recommended
 

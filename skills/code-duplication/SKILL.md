@@ -33,16 +33,16 @@ Comprehensive code duplication detection and analysis for all programming langua
 
 ```bash
 # Analyze entire codebase
-$claude-dev-code-duplication
+$code-duplication
 
 # Analyze specific directory
-$claude-dev-code-duplication src/components
+$code-duplication src/components
 
 # Analyze with custom configuration
-$claude-dev-code-duplication --config .duplication-config.json
+$code-duplication --config .duplication-config.json
 
 # Generate JSON output
-$claude-dev-code-duplication --format json --output duplication-report.json
+$code-duplication --format json --output duplication-report.json
 ```
 
 ## What This Skill Does

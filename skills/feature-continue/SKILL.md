@@ -22,8 +22,8 @@ Resume interrupted feature development with PM-DB tracking intact.
 ## Usage
 
 ```bash
-$claude-dev-feature-continue ./job-queue/feature-auth/tasks.md
-$claude-dev-feature-continue ./my-feature/tasks.md
+$feature-continue ./job-queue/feature-auth/tasks.md
+$feature-continue ./my-feature/tasks.md
 ```
 
 ## What It Does
@@ -84,7 +84,7 @@ Query: SELECT * FROM phase_runs WHERE plan_id = (
    This phase is already complete.
 
    Options:
-   1. View metrics: $claude-dev-pm-db dashboard
+   1. View metrics: $pm-db dashboard
    2. Start new run: /start-phase execute {path}
    3. Cancel
 ```
@@ -96,8 +96,8 @@ Query: SELECT * FROM phase_runs WHERE plan_id = (
    This feature hasn't been started with PM-DB tracking.
 
    Options:
-   1. Import to PM-DB: $claude-dev-pm-db import
-   2. Start fresh: $claude-dev-feature-new "{description}"
+   1. Import to PM-DB: $pm-db import
+   2. Start fresh: $feature-new "{description}"
    3. Execute without PM-DB: /start-phase execute {path}
 ```
 
@@ -200,14 +200,14 @@ db.complete_phase_run(run['id'], exit_code, summary)
 If no phase_run, create one:
 ```python
 # Import to PM-DB first
-$claude-dev-pm-db import
+$pm-db import
 
 # Then start new phase_run
-hook_output=$(cat <<EOF | python3 ~/.codex/hooks$claude-dev-pm-db/on-phase-run-start.py
+hook_output=$(cat <<EOF | python3 ~/.codex/hooks$pm-db/on-phase-run-start.py
 {
   "phase_name": "feature-auth",
   "project_name": "my-project",
-  "assigned_agent": "claude-dev-start-phase-execute"
+  "assigned_agent": "start-phase-execute"
 }
 EOF
 )
@@ -258,11 +258,11 @@ def detect_progress(phase_run_id):
 
 ```bash
 # Session 1 (interrupted at Task 4):
-$claude-dev-feature-new "add auth"
+$feature-new "add auth"
 # ... completes Tasks 1-3, then session drops
 
 # Session 2 (resume):
-$claude-dev-feature-continue ./job-queue/feature-auth/tasks.md
+$feature-continue ./job-queue/feature-auth/tasks.md
 # ✅ Resumes from Task 4, PM-DB tracking intact
 ```
 
@@ -272,11 +272,11 @@ $claude-dev-feature-continue ./job-queue/feature-auth/tasks.md
 
 ```bash
 # Day 1: Start feature
-$claude-dev-feature-new "payment processing"
+$feature-new "payment processing"
 # ... completes Tasks 1-5
 
 # Day 2: Resume
-$claude-dev-feature-continue ./job-queue/feature-payment/tasks.md
+$feature-continue ./job-queue/feature-payment/tasks.md
 # ✅ Continues from Task 6
 ```
 
@@ -286,12 +286,12 @@ $claude-dev-feature-continue ./job-queue/feature-payment/tasks.md
 
 ```bash
 # Attempt 1: Failed at Task 3 (quality gate failure)
-$claude-dev-feature-new "admin dashboard"
+$feature-new "admin dashboard"
 # ... Tasks 1-2 pass, Task 3 fails quality gate
 
 # Attempt 2: Fix and resume
 # (manually fix issues)
-$claude-dev-feature-continue ./job-queue/feature-admin/tasks.md
+$feature-continue ./job-queue/feature-admin/tasks.md
 # ✅ Re-runs Task 3 (failed), then continues to Task 4-7
 ```
 
@@ -308,7 +308,7 @@ Path: ./job-queue/feature-auth/tasks.md
 
 Options:
   1. Check path is correct
-  2. Run $claude-dev-feature-new to create feature
+  2. Run $feature-new to create feature
   3. Create task-list.md manually
 ```
 
@@ -325,7 +325,7 @@ This suggests the feature hasn't been executed yet.
 
 Options:
   1. Run /start-phase plan first
-  2. Run $claude-dev-feature-new for complete workflow
+  2. Run $feature-new for complete workflow
   3. Run /start-phase execute to start fresh
 ```
 
@@ -343,7 +343,7 @@ All tasks: 7/7 complete ✅
 Nothing to resume.
 
 View results:
-  - Dashboard: $claude-dev-pm-db dashboard
+  - Dashboard: $pm-db dashboard
   - Summary: ./job-queue/feature-auth/planning/phase-structure/phase-summary.md
 ```
 

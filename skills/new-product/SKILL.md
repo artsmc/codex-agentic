@@ -190,7 +190,7 @@ Write to: /job-queue/product-{name}/big-idea.md
 
 ## Stage 2-5: Parallel Deep Research for Architectural Documents
 
-Launch **4 parallel research agents** using the `Task` tool with `subagent_type="general-purpose"`.
+Launch **4 parallel research agents** using the `Task` tool with `skill="general-purpose"`.
 
 Each agent is assigned one architectural document and operates independently.
 
@@ -913,25 +913,25 @@ Research notes: /job-queue/product-{name}/research-notes/output-research.md
 
 ```bash
 # Agent 1: Runtime Execution
-Task tool:
+delegation workflow:
   subagent_type: "general-purpose"
   description: "Runtime execution research"
   prompt: [Stage 2 agent task]
 
 # Agent 2: Abstraction Layer
-Task tool:
+delegation workflow:
   subagent_type: "general-purpose"
   description: "Abstraction layer research"
   prompt: [Stage 3 agent task]
 
 # Agent 3: Integration Layer
-Task tool:
+delegation workflow:
   subagent_type: "general-purpose"
   description: "Integration layer research"
   prompt: [Stage 4 agent task]
 
 # Agent 4: Output Rendering
-Task tool:
+delegation workflow:
   subagent_type: "general-purpose"
   description: "Output rendering research"
   prompt: [Stage 5 agent task]
@@ -1119,7 +1119,7 @@ Error: [error message]
 Partial work saved at: /job-queue/product-{name}/
 
 Recovery:
-  - Fix the issue and resume with: $claude-dev-new-product [input]
+  - Fix the issue and resume with: $new-product [input]
   - Or manually continue research
 ```
 

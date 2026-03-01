@@ -120,11 +120,11 @@ feature_name=$(basename "$input_folder" | sed 's/^feature-//')
 project_name=${project_name:-$feature_name}
 
 # Initialize phase run tracking
-hook_output=$(cat <<EOF | python3 ~/.codex/hooks$claude-dev-pm-db/on-phase-run-start.py
+hook_output=$(cat <<EOF | python3 ~/.codex/hooks$pm-db/on-phase-run-start.py
 {
   "phase_name": "$phase_name",
   "project_name": "$project_name",
-  "assigned_agent": "claude-dev-start-phase-execute"
+  "assigned_agent": "start-phase-execute"
 }
 EOF
 )
@@ -160,7 +160,7 @@ Tracking active at: ~/.codex/projects.db
 ```bash
 # Initialize invocation linked to phase_run
 invocation_output=$(python3 ~/.codex/skills/start-phase/scripts/cache_wrapper.py init \
-    --agent-name "claude-dev-start-phase-execute" \
+    --agent-name "start-phase-execute" \
     --purpose "Execute phase: $phase_name" \
     --phase-run-id $phase_run_id 2>/dev/null)
 
@@ -508,8 +508,8 @@ When executing parallel waves:
    Spawning 2 subagent workers...
    ```
 
-2. **Launch agents using Task tool:**
-   - Use Task tool with subagent_type for each agent
+2. **Launch agents using delegation workflow:**
+   - Use delegation workflow with skill for each agent
    - Provide clear, isolated task descriptions
    - Ensure no shared file conflicts
 
@@ -697,11 +697,11 @@ Last commit: 8 minutes ago
 
 **Create PM-DB task run record:**
 ```bash
-hook_output=$(cat <<EOF | python3 ~/.codex/hooks$claude-dev-pm-db/on-task-run-start.py
+hook_output=$(cat <<EOF | python3 ~/.codex/hooks$pm-db/on-task-run-start.py
 {
   "phase_run_id": $PM_DB_PHASE_RUN_ID,
   "task_key": "13",
-  "assigned_agent": "claude-agent-nextjs-backend-developer"
+  "assigned_agent": "nextjs-backend-developer"
 }
 EOF
 )
@@ -733,12 +733,12 @@ SUBAGENT_INVOCATION_ID=$(echo "$subagent_invocation" | jq -r '.invocation_id')
 
 **Now launch the task with a specialized agent:**
 
-Use the Task tool to delegate this task to the appropriate specialized agent:
+Use the delegation workflow to delegate this task to the appropriate specialized agent:
 
 1. Determine the agent_persona from the task-delegation.md file
 2. Read the full task details from the task list
-3. Invoke the Task tool with:
-   - subagent_type: {agent_persona} (e.g., "claude-agent-nextjs-backend-developer", "claude-agent-ui-developer", "qa-engineer")
+3. Invoke the delegation workflow with:
+   - subagent_type: {agent_persona} (e.g., "nextjs-backend-developer", "ui-developer", "qa-engineer")
    - description: Complete task description including:
      - Task number and name
      - Full task requirements
@@ -749,10 +749,10 @@ Use the Task tool to delegate this task to the appropriate specialized agent:
      - Specific files to modify
      - Quality requirements
 
-**Example Task tool invocation:**
+**Example delegation workflow invocation:**
 ```
-Task tool:
-  subagent_type: "claude-agent-nextjs-backend-developer"
+delegation workflow:
+  subagent_type: "nextjs-backend-developer"
   description: "Execute Task 13: Add Comprehensive Error Logging
 
 Context:
@@ -810,7 +810,7 @@ echo "   Duration: $(echo "$subagent_stats" | jq -r '.duration_seconds')s"
 
 **Mark PM-DB task run complete:**
 ```bash
-cat <<EOF | python3 ~/.codex/hooks$claude-dev-pm-db/on-task-run-complete.py
+cat <<EOF | python3 ~/.codex/hooks$pm-db/on-task-run-complete.py
 {
   "task_run_id": $PM_DB_TASK_RUN_ID,
   "exit_code": 0
@@ -881,7 +881,7 @@ declare -A subagent_invocation_ids
 
 for task in "${parallel_tasks[@]}"; do
   # Create PM-DB task run
-  hook_output=$(cat <<INNER_EOF | python3 ~/.codex/hooks$claude-dev-pm-db/on-task-run-start.py
+  hook_output=$(cat <<INNER_EOF | python3 ~/.codex/hooks$pm-db/on-task-run-start.py
 {
   "phase_run_id": $PM_DB_PHASE_RUN_ID,
   "task_key": "$task_key",
@@ -906,20 +906,20 @@ INNER_EOF
 done
 ```
 
-**Now use the Task tool to launch ALL parallel agents in a SINGLE message:**
+**Now use the delegation workflow to launch ALL parallel agents in a SINGLE message:**
 
-This is critical - you MUST invoke the Task tool multiple times in ONE message to achieve true parallel execution.
+This is critical - you MUST invoke the delegation workflow multiple times in ONE message to achieve true parallel execution.
 
 For each task in the parallel wave:
 1. Read the task details from the task list
 2. Identify the assigned agent from task-delegation.md
 3. Prepare the task description with all context
 
-Then, in a SINGLE response message, invoke the Task tool once for each parallel task:
+Then, in a SINGLE response message, invoke the delegation workflow once for each parallel task:
 
 **Task 1 Tool Call:**
 ```
-Task tool:
+delegation workflow:
   subagent_type: "{agent_persona_1}"
   description: "Execute Task {n}: {task_name_1}
 
@@ -929,7 +929,7 @@ Task tool:
 
 **Task 2 Tool Call (in same message):**
 ```
-Task tool:
+delegation workflow:
   subagent_type: "{agent_persona_2}"
   description: "Execute Task {n+1}: {task_name_2}
 
@@ -939,7 +939,7 @@ Task tool:
 
 **Task 3 Tool Call (in same message):**
 ```  
-Task tool:
+delegation workflow:
   subagent_type: "{agent_persona_3}"
   description: "Execute Task {n+2}: {task_name_3}
 
@@ -947,7 +947,7 @@ Task tool:
 "
 ```
 
-**After invoking all Task tool calls in parallel, wait for ALL agents to complete.**
+**After invoking all delegation workflow calls in parallel, wait for ALL agents to complete.**
 
 Do NOT proceed until every agent in the wave has finished.
 
@@ -1047,7 +1047,7 @@ The **quality-gate hook** runs automatically.
 **Store code review in PM-DB:**
 ```bash
 # After code review completes
-cat <<EOF | python3 ~/.codex/hooks$claude-dev-pm-db/on-code-review.py
+cat <<EOF | python3 ~/.codex/hooks$pm-db/on-code-review.py
 {
   "phase_run_id": $PM_DB_PHASE_RUN_ID,
   "reviewer": "code-reviewer-agent",
@@ -1060,13 +1060,13 @@ EOF
 **Store quality gate result in PM-DB:**
 ```bash
 # Record quality gate result
-cat <<EOF | python3 ~/.codex/hooks$claude-dev-pm-db/on-quality-gate.py
+cat <<EOF | python3 ~/.codex/hooks$pm-db/on-quality-gate.py
 {
   "phase_run_id": $PM_DB_PHASE_RUN_ID,
   "gate_type": "code_review",
   "status": "passed",
   "result_summary": "All checks passed. Lint: 0 errors, Build: success, Tests: 34/34 passing",
-  "checked_by": "claude-agent-code-reviewer"
+  "checked_by": "code-reviewer"
 }
 EOF
 ```
@@ -1146,7 +1146,7 @@ Beginning phase closeout...
 
 **Mark PM-DB phase run complete:**
 ```bash
-hook_output=$(cat <<EOF | python3 ~/.codex/hooks$claude-dev-pm-db/on-phase-run-complete.py
+hook_output=$(cat <<EOF | python3 ~/.codex/hooks$pm-db/on-phase-run-complete.py
 {
   "phase_run_id": $PM_DB_PHASE_RUN_ID,
   "exit_code": 0,
@@ -1287,7 +1287,7 @@ Include PM-DB metrics and cache statistics:
 - Code reviews: {review_count}
 - Quality gates passed: {total}/{total}
 
-View full dashboard: $claude-dev-pm-db dashboard
+View full dashboard: $pm-db dashboard
 
 ## Agent Context Caching Statistics
 
@@ -1401,8 +1401,8 @@ PM-DB Task Runs: {total} tracked ✅
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Recommended next steps:
-1. View PM-DB dashboard: $claude-dev-pm-db dashboard
-2. Update Memory Bank: /memorybank sync
+1. View PM-DB dashboard: $pm-db dashboard
+2. Update Memory Bank: $memorybank-sync
 3. Review phase summary
 4. Plan next phase from candidates
 

@@ -40,7 +40,7 @@ Read to check: memory-bank/systemPatterns.md
 ```
 
 **If the file doesn't exist:**
-- Invoke the corresponding Codex skill "claude-dev-documentation-start"
+- Invoke "documentation-start"
 - Wait for completion
 - Display: "✅ Step 1/6: Documentation initialized"
 
@@ -55,18 +55,18 @@ Read to check: memory-bank/systemPatterns.md
 
 ## Step 2: Generate Feature Specification
 
-Invoke the corresponding Codex skill "claude-dev-spec-plan" with the feature_description argument:
+Invoke "spec-plan" with the feature_description argument:
 
 ```
-Invoke the corresponding Codex skill:
-  skill: "claude-dev-spec-plan"
+Invoke:
+  skill: "spec-plan"
   args: "{{feature_description}}"
 ```
 
 **What to expect:**
 - The spec-plan skill will:
   1. Research and gather context
-  2. Launch `claude-agent-spec-writer` skill
+  2. Launch `spec-writer` skill
   3. Generate FRD, FRS, GS, TR, and task-list.md files
   4. Save to: `./job-queue/feature-{name}/docs/`
 
@@ -83,11 +83,11 @@ Invoke the corresponding Codex skill:
 
 ## Step 3: Review Specification Quality
 
-Invoke the corresponding Codex skill "claude-dev-spec-review":
+Invoke "spec-review":
 
 ```
-Invoke the corresponding Codex skill:
-  skill: "claude-dev-spec-review"
+Invoke:
+  skill: "spec-review"
 ```
 
 **What to expect:**
@@ -116,14 +116,14 @@ Invoke the corresponding Codex skill:
 Find the task-list.md file from the spec generation:
 
 ```bash
-Use Glob tool: "**/feature-*/task-list.md"
+Use `rg --files` or globbing: "**/feature-*/task-list.md"
 ```
 
-Then use the Skill tool to invoke "claude-dev-start-phase-plan" with the task list path:
+Then invoke "start-phase-plan" with the task list path:
 
 ```
-Invoke the corresponding Codex skill:
-  skill: "claude-dev-start-phase-plan"
+Invoke:
+  skill: "start-phase-plan"
   args: "{path_to_task_list}"
 ```
 
@@ -148,11 +148,11 @@ Invoke the corresponding Codex skill:
 
 ## Step 5: Import to PM-DB
 
-Invoke the corresponding Codex skill "claude-dev-pm-db" with import command:
+Invoke "pm-db" with import command:
 
 ```
-Invoke the corresponding Codex skill:
-  skill: "claude-dev-pm-db"
+Invoke:
+  skill: "pm-db"
   args: "import --project feature-{name}"
 ```
 
@@ -179,11 +179,11 @@ Invoke the corresponding Codex skill:
 
 ## Step 6: Execute Phase with Quality Gates
 
-Invoke the corresponding Codex skill "claude-dev-start-phase-execute" with the task list path:
+Invoke "start-phase-execute" with the task list path:
 
 ```
-Invoke the corresponding Codex skill:
-  skill: "claude-dev-start-phase-execute"
+Invoke:
+  skill: "start-phase-execute"
   args: "{path_to_task_list}"
 ```
 
@@ -208,7 +208,7 @@ Invoke the corresponding Codex skill:
 
 **If execution fails:**
 - Display which task failed
-- Show: "Use $claude-dev-feature-continue to resume"
+- Show: "Use $feature-continue to resume"
 
 ---
 
@@ -233,8 +233,8 @@ Completed Steps:
   ✅ [6/6] Phase executed
 
 Next steps:
-  - View metrics: $claude-dev-pm-db dashboard
-  - Update Memory Bank: $claude-dev-memory-bank-sync
+  - View metrics: $pm-db dashboard
+  - Update Memory Bank: $memory-bank-sync
   - View phase summary: ./job-queue/feature-{name}/planning/phase-structure/phase-summary.md
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -268,9 +268,9 @@ Steps skipped:
 Error: Validation found critical issues in FRD.md
 
 Recovery options:
-  1. Fix issues manually and run: $claude-dev-spec-review
-  2. Regenerate spec: $claude-dev-spec-plan "{{feature_description}}"
-  3. Resume with: $claude-dev-feature-continue
+  1. Fix issues manually and run: $spec-review
+  2. Regenerate spec: $spec-plan "{{feature_description}}"
+  3. Resume with: $feature-continue
 ```
 
 ---

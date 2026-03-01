@@ -35,11 +35,11 @@ Bootstrap a new project with a complete documentation hub structure.
 
 ## What This Skill Does
 
-Creates the Documentation Hub file structure in a project's `cline-docs/` directory:
+Creates the Documentation Hub file structure in a project's `documentation hub directory/` directory:
 
 ```
 project-root/
-└── cline-docs/
+└── documentation hub directory/
     ├── systemArchitecture.md      # High-level architecture diagrams
     ├── keyPairResponsibility.md   # Module responsibilities
     ├── glossary.md                # Domain-specific terms
@@ -49,7 +49,7 @@ project-root/
 ## Decision Tree: When to Use This Skill
 
 ```
-User wants to set up documentation → Does cline-docs/ exist?
+User wants to set up documentation → Does documentation hub directory/ exist?
     ├─ Yes → Run validation first
     │         ├─ Valid → Use /document-hub read instead
     │         └─ Invalid → Ask user: overwrite or skip?
@@ -69,8 +69,8 @@ User wants to set up documentation → Does cline-docs/ exist?
 First, check if a documentation hub already exists:
 
 ```bash
-# Check if cline-docs exists
-ls project-root/cline-docs/
+# Check if documentation hub directory exists
+ls project-root/documentation hub directory/
 
 # If exists, validate it first
 python scripts/validate_hub.py /path/to/project
@@ -224,7 +224,7 @@ import subprocess
 from pathlib import Path
 
 project_path = Path("/path/to/project")
-docs_path = project_path / "cline-docs"
+docs_path = project_path / "documentation hub directory"
 
 # Step 1: Check if exists
 if docs_path.exists():

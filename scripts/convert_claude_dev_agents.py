@@ -67,14 +67,36 @@ def rewrite_body(body: str, known_skill_names: set[str], known_agent_names: set[
     body = body.replace("Claude Code", "Codex")
     body = body.replace("Use Read tool", "Read")
     body = body.replace("AskUserQuestion", "ask the user")
-    body = body.replace("Skill tool:", "Invoke the corresponding Codex skill:")
-    body = body.replace("Use the Skill tool to invoke", "Invoke the corresponding Codex skill")
+    body = body.replace("Skill tool:", "Invoke the corresponding skill:")
+    body = body.replace("Use the Skill tool to invoke", "Invoke the corresponding skill")
+    body = body.replace("Then use the Skill tool to invoke", "Then invoke")
+    body = body.replace("Task tool", "delegation workflow")
+    body = body.replace("uses Task tool to invoke", "invokes")
+    body = body.replace("subagent_type=", "skill=")
+    body = body.replace("cline-docs", "documentation hub directory")
+    body = body.replace("/home/artsmc/.claude/documentation hub directory/", "documentation hub directory/")
+    body = body.replace("`/memorybank sync`", "`$memorybank-sync`")
+    body = body.replace("/memorybank sync", "$memorybank-sync")
+    body = body.replace("Use Glob tool:", "Use `rg --files` or globbing:")
+    body = body.replace("Use Glob tool", "Use `rg --files` or globbing")
+    body = body.replace("Use Grep tool", "Use `rg`")
+    body = body.replace("Use Read tool", "Read")
+    body = body.replace("Invoke the corresponding Codex skill", "Invoke")
 
     for name in sorted(known_skill_names, key=len, reverse=True):
         body = body.replace(f"/{name}", f"${name}")
+        body = body.replace(f'"claude-dev-{name}"', f'"{name}"')
+        body = body.replace(f"$claude-dev-{name}", f"${name}")
 
     for name in sorted(known_agent_names, key=len, reverse=True):
         body = body.replace(f"{name} agent", f"`{name}` skill")
+        body = body.replace(f'"claude-agent-{name}"', f'"{name}"')
+        body = body.replace(f"$claude-agent-{name}", f"${name}")
+
+    body = body.replace("Invoke the corresponding skill:", "Invoke:")
+    body = body.replace("Invoke the corresponding skill", "Invoke")
+    body = body.replace("delegation workflow with subagent_type", "delegation workflow with skill")
+    body = body.replace("use the host application or another Codex session", "use another Codex session or perform the work directly")
 
     return body
 

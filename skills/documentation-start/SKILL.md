@@ -22,8 +22,8 @@ Initialize project documentation systems (Memory Bank + Document Hub) if needed.
 ## Usage
 
 ```bash
-$claude-dev-documentation-start           # Initialize if needed
-$claude-dev-documentation-start --force   # Force re-initialization
+$documentation-start           # Initialize if needed
+$documentation-start --force   # Force re-initialization
 ```
 
 ## What It Does
@@ -39,7 +39,7 @@ $claude-dev-documentation-start --force   # Force re-initialization
      - progress.md
 
 2. **Check Document Hub Status**
-   - Check if `cline-docs/` directory exists
+   - Check if `documentation hub directory/` directory exists
    - Check if all 4 core files present:
      - systemArchitecture.md
      - keyPairResponsibility.md
@@ -47,8 +47,8 @@ $claude-dev-documentation-start --force   # Force re-initialization
      - techStack.md
 
 3. **Initialize If Needed**
-   - If Memory Bank missing → Call `$claude-dev-memory-bank-initialize`
-   - If Document Hub missing → Call `$claude-dev-document-hub-initialize`
+   - If Memory Bank missing → Call `$memory-bank-initialize`
+   - If Document Hub missing → Call `$document-hub-initialize`
    - If both exist → Report "Already initialized ✅"
 
 4. **Force Mode**
@@ -62,16 +62,16 @@ $claude-dev-documentation-start --force   # Force re-initialization
 START
   ↓
 Check memory-bank/ exists?
-  ├─ NO → Call $claude-dev-memory-bank-initialize
+  ├─ NO → Call $memory-bank-initialize
   └─ YES → Validate 6 files present
       ├─ Valid → Skip Memory Bank ✅
-      └─ Invalid → Call $claude-dev-memory-bank-initialize
+      └─ Invalid → Call $memory-bank-initialize
   ↓
-Check cline-docs/ exists?
-  ├─ NO → Call $claude-dev-document-hub-initialize
+Check documentation hub directory/ exists?
+  ├─ NO → Call $document-hub-initialize
   └─ YES → Validate 4 files present
       ├─ Valid → Skip Document Hub ✅
-      └─ Invalid → Call $claude-dev-document-hub-initialize
+      └─ Invalid → Call $document-hub-initialize
   ↓
 Report initialization status
   ↓
@@ -96,7 +96,7 @@ Document Hub:
   Document Hub: ✅ Ready
 
 Next steps:
-  - Run $claude-dev-feature-new to start a new feature
+  - Run $feature-new to start a new feature
   - Or use individual skills as needed
 ```
 
@@ -110,7 +110,7 @@ Next steps:
 ## Implementation Details
 
 This skill uses the Skill tool to invoke:
-- `$claude-dev-memory-bank-initialize` (if needed)
-- `$claude-dev-document-hub-initialize` (if needed)
+- `$memory-bank-initialize` (if needed)
+- `$document-hub-initialize` (if needed)
 
 No direct file manipulation - delegates to existing skills.

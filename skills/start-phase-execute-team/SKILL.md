@@ -85,7 +85,7 @@ for each "## Task N:" section:
 {
   id: "1",
   subject: "Create auth API endpoint",
-  agent_type: "claude-agent-nextjs-backend-developer",
+  agent_type: "nextjs-backend-developer",
   depends_on: [],
   estimated_time: 20
 }
@@ -557,8 +557,8 @@ Quality Summary:
   Code review issues: 0
 
 Next steps:
-  - View metrics: $claude-dev-pm-db dashboard
-  - Update Memory Bank: $claude-dev-memory-bank-sync
+  - View metrics: $pm-db dashboard
+  - Update Memory Bank: $memory-bank-sync
   - View phase summary: ./job-queue/feature-{name}/planning/phase-structure/phase-summary.md
 ```
 
@@ -606,8 +606,8 @@ Recovery:
          "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
        }
      }
-  2. Retry with: $claude-dev-start-phase-execute ./tasks.md --team
-  3. Or fallback: $claude-dev-start-phase-execute ./tasks.md --sequential
+  2. Retry with: $start-phase-execute ./tasks.md --team
+  3. Or fallback: $start-phase-execute ./tasks.md --sequential
 ```
 
 ### Agent Spawn Failure
@@ -716,7 +716,7 @@ No manual intervention needed ✓
 ### Auto-Detect Mode (Default)
 
 ```bash
-$claude-dev-start-phase-execute ./job-queue/feature-auth/task-list.md
+$start-phase-execute ./job-queue/feature-auth/task-list.md
 
 # System detects 7 tasks → uses team mode
 # Output: "⚡ Team mode: ENABLED (auto-detected 7 tasks)"
@@ -725,7 +725,7 @@ $claude-dev-start-phase-execute ./job-queue/feature-auth/task-list.md
 ### Force Team Mode
 
 ```bash
-$claude-dev-start-phase-execute ./job-queue/feature-profile/task-list.md --team
+$start-phase-execute ./job-queue/feature-profile/task-list.md --team
 
 # Even if < 7 tasks, uses team mode
 ```
@@ -733,7 +733,7 @@ $claude-dev-start-phase-execute ./job-queue/feature-profile/task-list.md --team
 ### Force Sequential Mode
 
 ```bash
-$claude-dev-start-phase-execute ./job-queue/feature-logout/task-list.md --sequential
+$start-phase-execute ./job-queue/feature-logout/task-list.md --sequential
 
 # Even if 7+ tasks, uses sequential mode
 ```
@@ -789,5 +789,5 @@ After implementing this skill:
 2. **Test with complex feature** (10+ tasks)
 3. **Measure real speedups**
 4. **Refine wave detection logic**
-5. **Add to $claude-dev-feature-new as option**
+5. **Add to $feature-new as option**
 6. **Document in README**

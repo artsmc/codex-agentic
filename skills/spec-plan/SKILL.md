@@ -25,7 +25,7 @@ The content below was adapted from the Claude source. Rewrite tool and runtime a
 
 # Spec Plan: Pre-Planning & Research
 
-Research, gather context, and launch `claude-agent-spec-writer` skill with comprehensive documentation.
+Research, gather context, and launch `spec-writer` skill with comprehensive documentation.
 
 ## Usage
 
@@ -43,7 +43,7 @@ This skill handles the **pre-planning stage** of feature specification:
 1. Clarify requirements with the user
 2. Fetch latest documentation (MCP tools)
 3. Check Memory Bank for existing work
-4. Launch `claude-agent-spec-writer` skill with full context
+4. Launch `spec-writer` skill with full context
 
 ## Workflow
 
@@ -139,10 +139,10 @@ Read memory-bank/activeContext.md
 
 ### Phase 4: Launch Spec-Writer Agent
 
-Now launch the `claude-agent-spec-writer` skill with comprehensive context:
+Now launch the `spec-writer` skill with comprehensive context:
 
 ```bash
-Task tool with subagent_type="claude-agent-spec-writer"
+delegation workflow with skill="spec-writer"
 ```
 
 **Agent Prompt Template:**
@@ -232,7 +232,7 @@ After this skill completes:
 
 ## Next Step
 
-Once `claude-agent-spec-writer` skill completes, use `/spec review` to:
+Once `spec-writer` skill completes, use `/spec review` to:
 - Validate generated specs
 - Critique quality
 - Collect user feedback
