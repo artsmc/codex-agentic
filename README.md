@@ -1,49 +1,62 @@
 # Codex Agentic
 
-Shareable Codex/OpenAI skills, plus full-source migrations of Claude-oriented agent bundles.
+**A shareable Codex/OpenAI skill bundle with guided workflows, advanced orchestration patterns, specialist skills, and a full migration of `artsmc/claude-dev-agents`.**
 
-## Start Here
+[![Skills: 48](https://img.shields.io/badge/Skills-48-blue)](./skills/)
+[![Workflows: 23](https://img.shields.io/badge/Workflow%20Skills-23-green)](./skills/)
+[![Specialists: 24](https://img.shields.io/badge/Specialist%20Skills-24-orange)](./skills/)
+[![Migration: Included](https://img.shields.io/badge/Claude%20Migration-Included-purple)](./reports/claude-dev-agents-migration.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](./LICENSE)
 
-The easiest way to approach this repo is:
+> Start with `feature-new`, build context with `document-hub-*` and `memorybank-*`, then move into `start-phase-*`, `pm-db`, and specialist skills for more advanced workflows.
 
-1. Start with a guided workflow like `feature-new`.
-2. Set up project context with `documentation-start`, `document-hub-*`, and `memorybank-*`.
-3. Move to focused planning and review skills like `spec-plan`, `spec-review`, and `pm-db`.
-4. Graduate to the more advanced orchestration skills like `start-phase-plan`, `start-phase-execute`, and `remote-control-builder`.
+## Quick Start
 
-If you are trying to understand the bundle quickly, treat `feature-new` as the on-ramp, `document-hub-*` and `memorybank-*` as the context layer, and the `start-phase-*` skills as the advanced layer.
+```bash
+# Guided on-ramp
+$feature-new "Add user authentication"
 
-## Structure
+# Build project context
+$document-hub-read
+$memorybank-read
 
-- `skills/` - installable Codex skills
-- `scripts/convert_claude_dev_agents.py` - batch converter used to migrate `artsmc/claude-dev-agents`
-- `reports/` - migration reports and mapping notes
-- `imports/claude-dev-agents/` - vendored Claude runtime assets kept for reference
-- `install.sh` - copy all repo skills into `~/.codex/skills`
+# Move into structured planning
+$spec-plan
+$start-phase-plan ./job-queue/feature-auth/task-list.md
+```
 
-## Included Skills
+**Recommended progression**
 
-- `claude-to-openai-converter` - inventory Claude Code agents, commands, skills, and `CLAUDE.md` files, then convert them into the right OpenAI/Codex target
-- original workflow names such as `feature-new`, `spec-plan`, `pm-db`, and `start-phase-plan`
-- original specialist names such as `api-designer`, `spec-writer`, `security-auditor`, and `python-reviewer`
+1. `feature-new` for the easiest end-to-end workflow.
+2. `documentation-start`, `document-hub-*`, and `memorybank-*` for the context layer.
+3. `spec-plan`, `spec-review`, and `pm-db` for planning and tracking.
+4. `start-phase-plan`, `start-phase-execute`, and `remote-control-builder` for advanced orchestration.
 
-When source names collide, the conversion falls back to the source filename, for example `nextjs-code-reviewer` or `python-reviewer-2`.
+## Why This Repo
 
-## Recommended Path
+- **Beginner-friendly entry point:** `feature-new` gives you a clear starting workflow instead of a pile of disconnected skills.
+- **Context-first workflows:** `document-hub-*` and `memorybank-*` help build the project understanding the rest of the bundle expects.
+- **Advanced orchestration:** `start-phase-*`, `pm-db`, and `remote-control-builder` preserve the higher-order workflow patterns from the Claude ecosystem.
+- **Specialist depth:** skills like `api-designer`, `spec-writer`, `security-auditor`, and `python-reviewer` let you pull in focused expertise when needed.
+- **Full-source migration included:** the original Claude runtime materials are preserved under [`imports/claude-dev-agents/`](./imports/claude-dev-agents/).
 
-### Getting Started
+## What’s Included
 
-Use these first:
+### Guided workflows
 
-- `feature-new` - the most approachable end-to-end workflow
-- `documentation-start` - initialize the documentation systems expected by the wider workflow
-- `document-hub-read` - quickly understand the current documentation hub
-- `memorybank-read` - quickly understand the current memory-bank state
+- `feature-new`
+- `feature-continue`
+- `spec-plan`
+- `spec-review`
+- `pm-db`
+- `start-phase-plan`
+- `start-phase-execute`
+- `start-phase-execute-team`
+- `remote-control-builder`
 
-### Context and Documentation
+### Context layer
 
-Use these to create and maintain project context:
-
+- `documentation-start`
 - `document-hub-initialize`
 - `document-hub-read`
 - `document-hub-analyze`
@@ -53,69 +66,55 @@ Use these to create and maintain project context:
 - `memorybank-sync`
 - `memorybank-update`
 
-These skills are the context backbone for the planning and execution workflows.
-
-### Planning and Tracking
-
-Use these once the documentation layer is in place:
-
-- `spec-plan` - generate specs and planning artifacts
-- `spec-review` - review the quality of those specs
-- `pm-db` - inspect or manage the project-management database layer explicitly
-
-### Advanced Workflows
-
-Use these once you want more control or more automation:
-
-- `start-phase-plan` - break work into waves and execution phases
-- `start-phase-execute` - run structured execution with quality gates and PM-DB tracking
-- `start-phase-execute-team` - team-oriented execution variant
-- `remote-control-builder` - higher-complexity orchestration workflow
-
-### Specialist Skills
-
-When you need focused expertise, reach for the migrated specialist skills such as:
+### Specialist skills
 
 - `api-designer`
 - `spec-writer`
 - `security-auditor`
 - `python-reviewer`
 - `technical-writer`
+- `debugger-specialist`
+- `devops-infrastructure`
+- `database-schema-specialist`
+- and more under [`skills/`](./skills/)
 
-## Included Imports
+### Conversion tooling
 
-The repo also vendors the non-portable parts of `artsmc/claude-dev-agents` under `imports/claude-dev-agents/`, including:
+- `claude-to-openai-converter` for translating Claude artifacts into Codex/OpenAI targets
+- [`scripts/convert_claude_dev_agents.py`](./scripts/convert_claude_dev_agents.py) for batch migration work
+- [`reports/claude-dev-agents-migration.md`](./reports/claude-dev-agents-migration.md) for the source-to-target mapping
 
-- `hooks/`
-- `bin/`
-- `lib/`
-- `migrations/`
-- `prisma/`
-- `scripts/`
-- `tests/`
-- `docs/`
-- `sounds/`
-- `test-caching/`
+## Learning Path
 
-These are kept as source material because Codex skills do not have direct equivalents for Claude hooks, slash-command UX, or the original runtime orchestration.
+### Start here
 
-## Install With Codex
+Use these first if you want the smoothest onboarding:
 
-If Codex already has the system `skill-installer`, install directly from GitHub.
+- `feature-new` for the most approachable end-to-end workflow
+- `documentation-start` to initialize the expected documentation systems
+- `document-hub-read` to understand the current documentation hub
+- `memorybank-read` to understand the current memory-bank state
 
-Example for one skill:
+### Then move here
 
-```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo artsmc/codex-agentic \
-  --path skills/claude-to-openai-converter
-```
+Once you have context, use:
 
-Restart Codex after installation.
+- `spec-plan` to generate specs and planning artifacts
+- `spec-review` to review spec quality
+- `pm-db` to initialize, migrate, import, and inspect project tracking
 
-To install the whole bundle from a clone, use `install.sh`.
+### Advanced layer
 
-## Install From A Clone
+When you want more control or more automation:
+
+- `start-phase-plan`
+- `start-phase-execute`
+- `start-phase-execute-team`
+- `remote-control-builder`
+
+## Installation
+
+### Option 1: Clone and install the full bundle
 
 ```bash
 git clone https://github.com/artsmc/codex-agentic.git ~/.codex/codex-agentic
@@ -124,19 +123,43 @@ bash ~/.codex/codex-agentic/install.sh
 
 Restart Codex after installation.
 
-## Create The GitHub Repo
+### Option 2: Install a single skill with the Codex skill installer
 
-From this directory:
+If Codex already has the system `skill-installer`, install directly from GitHub:
 
 ```bash
-cd ~/.codex/codex-agentic
-git add .
-git commit -m "Initial Codex skill repo"
-gh repo create codex-agentic --public --source=. --remote=origin --push
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo artsmc/codex-agentic \
+  --path skills/feature-new
 ```
+
+You can swap `skills/feature-new` for any other skill path in this repository.
+
+Restart Codex after installation.
+
+## Repository Layout
+
+- [`skills/`](./skills/) - installable Codex skills
+- [`imports/claude-dev-agents/`](./imports/claude-dev-agents/) - vendored Claude runtime assets kept for reference
+- [`reports/`](./reports/) - migration reports and mapping notes
+- [`scripts/`](./scripts/) - migration and maintenance tooling
+- [`install.sh`](./install.sh) - copy all repo skills into `~/.codex/skills`
+
+## About The Migration
+
+This repository does not just copy prompts. It preserves:
+
+- migrated workflow skills
+- migrated specialist-agent skills
+- helper scripts, tests, migrations, and schema snapshots where they add value
+- the non-portable Claude runtime materials as reference imports
+
+The main caveat is that Codex does not have direct equivalents for every Claude runtime feature. Hooks, slash-command UX, and some orchestration behavior are preserved as source material rather than native Codex features.
+
+See [`reports/claude-dev-agents-migration.md`](./reports/claude-dev-agents-migration.md) for the detailed mapping.
 
 ## Notes
 
 - This repo intentionally excludes private Codex runtime state such as auth, logs, sessions, and SQLite files.
-- The `artsmc/claude-dev-agents` migration report lives at `reports/claude-dev-agents-migration.md`.
+- When source names collide, the migration falls back to the source filename, for example `nextjs-code-reviewer` or `python-reviewer-2`.
 - Add more shareable skills under `skills/<skill-name>/`.
