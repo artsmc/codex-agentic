@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Converter"
+  short_description: "Convert Claude agents to Codex"
+  default_prompt: "Use $claude-to-openai-converter to analyze Claude agents or commands, build a migration plan, and convert them to the appropriate OpenAI/Codex format."
