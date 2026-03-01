@@ -19,7 +19,7 @@ The content below was adapted from the Claude source. Rewrite tool and runtime a
 
 - Invoke this workflow as `$start-phase-execute <task_list_file>`.
 - References to hooks, `cache_wrapper.py`, subagents, or parallel Task tool calls are optional host-side orchestration patterns from the original Claude setup.
-- In Codex, prefer direct skill invocation, direct file edits, and explicit shell commands. If you want the original PM-DB or hook behavior, wire it from the vendored assets in `pm-db` and `imports/claude-dev-agents/`.
+- In Codex, prefer direct skill invocation, direct file edits, and explicit shell commands. If you want PM-DB-style automation, wire it from the migrated `pm-db` assets or your own host application.
 - When this document says "agent" or "subagent", interpret that as either another Codex session, a direct invocation of a migrated specialist skill, or manual execution in the current session.
 
 # Start-Phase: Mode 2 (Execute) with PM-DB Tracking

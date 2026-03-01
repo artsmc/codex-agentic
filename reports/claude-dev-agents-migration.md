@@ -4,13 +4,13 @@
 
 - Claude skills converted: 23
 - Claude agents converted: 24
-- Claude runtime and hook directories vendored under `imports/claude-dev-agents/` for reference
+- Claude runtime and hook directories were reviewed during migration, but the raw imported snapshot is no longer included
 
 ## Target Mapping
 
 - `skills/*/SKILL.md` -> Codex skills using the original skill name where possible
 - `agents/*.md` -> specialist Codex skills using the original agent name or filename on collision
-- Claude hooks and orchestration runtime -> vendored under `imports/claude-dev-agents/` and documented as non-equivalent/manual follow-up
+- Claude hooks and orchestration runtime -> documented as non-equivalent/manual follow-up
 
 ## Converted Skills
 
@@ -68,5 +68,5 @@
 ## Non-Equivalent Features
 
 - Claude slash-command UX was approximated with explicit Codex skill invocation via `$skill-name`.
-- Claude hooks were vendored as source material, but Codex skills do not have a direct lifecycle hook system.
-- Multi-agent runtime orchestration, prompt caching, and PM-DB automation were preserved as source assets under `imports/claude-dev-agents/`, but remain application-level concerns rather than static skill features.
+- Claude hooks do not have a direct Codex lifecycle equivalent.
+- Multi-agent runtime orchestration, prompt caching, and PM-DB automation remain application-level concerns rather than static skill features.

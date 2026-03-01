@@ -34,7 +34,7 @@ The content below was adapted from the Claude source. Rewrite tool and runtime a
 ## Codex Adaptation Notes
 
 - The helper scripts in `scripts/` and SQL migrations in `assets/migrations/` are the primary portable parts of this skill.
-- Hook files from the original Claude setup are vendored under `imports/claude-dev-agents/hooks/pm-db`, but Codex does not run them automatically.
+- The original Claude setup used hooks for automatic tracking, but Codex does not run those automatically.
 - Use this skill for explicit database setup, import, migration, and reporting tasks. Treat hook references as optional application integration work.
 
 # pm-db Skill
@@ -111,7 +111,7 @@ Default: `~/.codex/projects.db`
 
 ## Hook Sources
 
-The original Claude setup used hook scripts for automatic tracking. Those source files are preserved for reference under `imports/claude-dev-agents/hooks/pm-db`, but they are not native Codex behavior.
+The original Claude setup used hook scripts for automatic tracking, but they are not native Codex behavior.
 
 ## Schema
 

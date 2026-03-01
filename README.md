@@ -38,7 +38,7 @@ $start-phase-plan ./job-queue/feature-auth/task-list.md
 - **Context-first workflows:** `document-hub-*` and `memorybank-*` help build the project understanding the rest of the bundle expects.
 - **Advanced orchestration:** `start-phase-*`, `pm-db`, and `remote-control-builder` preserve the higher-order workflow patterns from the Claude ecosystem.
 - **Specialist depth:** skills like `api-designer`, `spec-writer`, `security-auditor`, and `python-reviewer` let you pull in focused expertise when needed.
-- **Full-source migration included:** the original Claude runtime materials are preserved under [`imports/claude-dev-agents/`](./imports/claude-dev-agents/).
+- **Lean migration bundle:** the useful workflows, specialists, scripts, and schema assets were kept without carrying the full Claude runtime snapshot.
 
 ## What’s Included
 
@@ -140,7 +140,6 @@ Restart Codex after installation.
 ## Repository Layout
 
 - [`skills/`](./skills/) - installable Codex skills
-- [`imports/claude-dev-agents/`](./imports/claude-dev-agents/) - vendored Claude runtime assets kept for reference
 - [`reports/`](./reports/) - migration reports and mapping notes
 - [`scripts/`](./scripts/) - migration and maintenance tooling
 - [`install.sh`](./install.sh) - copy all repo skills into `~/.codex/skills`
@@ -152,9 +151,8 @@ This repository does not just copy prompts. It preserves:
 - migrated workflow skills
 - migrated specialist-agent skills
 - helper scripts, tests, migrations, and schema snapshots where they add value
-- the non-portable Claude runtime materials as reference imports
 
-The main caveat is that Codex does not have direct equivalents for every Claude runtime feature. Hooks, slash-command UX, and some orchestration behavior are preserved as source material rather than native Codex features.
+The main caveat is that Codex does not have direct equivalents for every Claude runtime feature. Hooks, slash-command UX, and some orchestration behavior were translated into documentation notes or kept only where directly useful inside migrated skills.
 
 See [`reports/claude-dev-agents-migration.md`](./reports/claude-dev-agents-migration.md) for the detailed mapping.
 

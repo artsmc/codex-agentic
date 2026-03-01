@@ -9,9 +9,6 @@ from pathlib import Path
 
 import yaml
 
-RUNTIME_DIRS = ["hooks", "bin", "lib", "migrations", "prisma", "scripts", "tests", "docs", "sounds", "test-caching"]
-
-
 def load_frontmatter(path: Path) -> tuple[dict, str]:
     text = path.read_text()
     if not text.startswith("---\n"):
@@ -321,13 +318,13 @@ def write_report(dest_root: Path, skill_map: list[tuple[str, str]], agent_map: l
         "",
         f"- Claude skills converted: {len(skill_map)}",
         f"- Claude agents converted: {len(agent_map)}",
-        "- Claude runtime and hook directories vendored under `imports/claude-dev-agents/` for reference",
+        "- Claude runtime and hook directories were reviewed during migration, but the raw imported snapshot is not included",
         "",
         "## Target Mapping",
         "",
         "- `skills/*/SKILL.md` -> Codex skills using the original skill name where possible",
         "- `agents/*.md` -> specialist Codex skills using the original agent name or filename on collision",
-        "- Claude hooks and orchestration runtime -> vendored under `imports/claude-dev-agents/` and documented as non-equivalent/manual follow-up",
+        "- Claude hooks and orchestration runtime -> documented as non-equivalent/manual follow-up",
         "",
         "## Converted Skills",
         "",
@@ -343,29 +340,12 @@ def write_report(dest_root: Path, skill_map: list[tuple[str, str]], agent_map: l
             "## Non-Equivalent Features",
             "",
             "- Claude slash-command UX was approximated with explicit Codex skill invocation via `$skill-name`.",
-            "- Claude hooks were vendored as source material, but Codex skills do not have a direct lifecycle hook system.",
-            "- Multi-agent runtime orchestration, prompt caching, and PM-DB automation were preserved as source assets under `imports/claude-dev-agents/`, but remain application-level concerns rather than static skill features.",
+            "- Claude hooks do not have a direct Codex lifecycle equivalent.",
+            "- Multi-agent runtime orchestration, prompt caching, and PM-DB automation remain application-level concerns rather than static skill features.",
             "",
         ]
     )
     (report_dir / "claude-dev-agents-migration.md").write_text("\n".join(lines))
-
-
-def copy_runtime_dirs(source_root: Path, dest_root: Path) -> None:
-    imports_root = dest_root / "imports" / "claude-dev-agents"
-    imports_root.mkdir(parents=True, exist_ok=True)
-    for filename in ["README.md", ".gitignore", "prisma.config.ts"]:
-        source_file = source_root / filename
-        if source_file.exists():
-            shutil.copy2(source_file, imports_root / filename)
-    for dirname in RUNTIME_DIRS:
-        source = source_root / dirname
-        if not source.exists():
-            continue
-        target = imports_root / dirname
-        if target.exists():
-            shutil.rmtree(target)
-        shutil.copytree(source, target, symlinks=True, ignore_dangling_symlinks=True)
 
 
 def main() -> None:
@@ -385,7 +365,6 @@ def main() -> None:
 
     skill_map = [convert_skill(path, dest_root, known_skill_names, known_agent_names, used_names) for path in source_skill_dirs]
     agent_map = [convert_agent(path, dest_root, known_skill_names, known_agent_names, used_names) for path in source_agent_files]
-    copy_runtime_dirs(source_root, dest_root)
     write_report(dest_root, skill_map, agent_map)
 
 
